@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X</title>
+
+<style>
+*{box-sizing:border-box;font-family:Segoe UI,sans-serif}
+body{
+  margin:0;min-height:100vh;background:#000;color:#fff;
+  display:flex;justify-content:center;align-items:center;
+}
+.hidden{display:none}
+.glow{box-shadow:0 0 25px rgba(255,255,255,.6)}
+.box{
+  width:100%;max-width:380px;background:#050505;
+  border:1px solid #fff;border-radius:18px;padding:22px;
+}
+h1{text-align:center;margin-bottom:10px}
+input{
+  width:100%;padding:12px;margin-bottom:10px;
+  border-radius:10px;border:1px solid #555;background:#000;color:#fff
+}
+button{
+  width:100%;padding:12px;margin-top:8px;border:none;
+  border-radius:12px;background:#fff;color:#000;font-weight:bold;cursor:pointer
+}
+.status{text-align:center;font-size:13px;color:#0f0;margin-bottom:8px}
+.free{
+  background:#fff;color:#000;font-size:12px;font-weight:bold;
+  text-align:center;padding:6px;border-radius:8px;margin-bottom:12px
+}
+.toggle{
+  display:flex;justify-content:space-between;align-items:center;
+  background:#111;padding:10px;border-radius:12px;margin-bottom:10px
+}
+.switch{position:relative;width:44px;height:22px}
+.switch input{display:none}
+.slider{
+  position:absolute;inset:0;background:#555;border-radius:30px;transition:.3s
+}
+.slider:before{
+  content:"";position:absolute;width:18px;height:18px;left:2px;bottom:2px;
+  background:#fff;border-radius:50%;transition:.3s
+}
+.switch input:checked + .slider{background:#fff}
+.switch input:checked + .slider:before{transform:translateX(22px);background:#000}
+
+.sensi{
+  background:#111;padding:14px;border-radius:14px;margin:14px 0;font-size:14px
+}
+.sensi-title{text-align:center;font-weight:bold;margin-bottom:6px}
+.sensi p{display:flex;justify-content:space-between;margin:6px 0}
+
+/* INJETAR */
+.inject-box{
+  margin-top:10px;
+  text-align:center;
+  font-size:13px;
+}
+.progress{
+  width:100%;height:10px;background:#222;
+  border-radius:8px;overflow:hidden;margin:6px 0;
+}
+.bar{
+  height:100%;width:0;background:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="box glow">
+  <h1>Project X</h1>
+  <input id="user" placeholder="Login">
+  <input id="pass" type="password" placeholder="Senha">
+  <button onclick="logar()">ENTRAR</button>
+</div>
+
+<!-- PAINEL -->
+<div id="panel" class="box glow hidden">
+  <h1>Project X</h1>
+  <div class="status">STATUS: ONLINE</div>
+  <div class="free">Project X</div>
+
+  <div class="toggle">
+    <span>Auxílio de Mira [função]</span>
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+  </div>
+  <div class="toggle">
+    <span>Aim Legit [função]</span>
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+  </div>
+  <div class="toggle">
+    <span>Mira Grudante [função]</span>
+    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+  </div>
+
+  <div class="sensi">
+    <div class="sensi-title">🎯 SENSI FREE FIRE (ALEATÓRIA)</div>
+    <p>Geral <strong id="g">---</strong></p>
+    <p>Red Dot <strong id="r">---</strong></p>
+    <p>Mira 2x <strong id="x2">---</strong></p>
+    <p>Mira 4x <strong id="x4">---</strong></p>
+    <p>AWM <strong id="awm">---</strong></p>
+  </div>
+
+  <button onclick="gerarSensi()">GERAR SENSI</button>
+  <button onclick="injetar()">INJETAR NO FF</button>
+
+  <!-- STATUS INJETANDO -->
+  <div id="injectBox" class="inject-box hidden">
+    <strong id="injectText">INJETANDO...</strong>
+    <div class="progress">
+      <div id="bar" class="bar"></div>
+    </div>
+    <span id="finalText" class="hidden">
+      ✔ Sensi aplicada com sucesso<br>
+      <small>Abra o FF e configure manualmente</small>
+    </span>
+  </div>
+</div>
+
+<script>
+function logar(){
+  if(user.value==="123" && pass.value==="123"){
+    login.classList.add("hidden");
+    panel.classList.remove("hidden");
+  }else alert("Login ou senha incorretos");
+}
+
+function rand(min,max){
+  return Math.floor(Math.random()*(max-min+1))+min;
+}
+
+function gerarSensi(){
+  g.textContent=rand(140,200);
+  r.textContent=rand(130,190);
+  x2.textContent=rand(120,180);
+  x4.textContent=rand(100,160);
+  awm.textContent=rand(70,140);
+}
+
+function injetar(){
+  if(g.textContent==="---") gerarSensi();
+
+  injectBox.classList.remove("hidden");
+  finalText.classList.add("hidden");
+  injectText.textContent="INJETANDO...";
+  bar.style.width="0%";
+
+  let p=0;
+  let interval=setInterval(()=>{
+    p+=10;
+    bar.style.width=p+"%";
+    if(p>=100){
+      clearInterval(interval);
+      injectText.textContent="CONCLUÍDO";
+      finalText.classList.remove("hidden");
+    }
+  },200);
+}
+</script>
+
+</body>
+</html>
+</html>y>
+</html>
+</html>
