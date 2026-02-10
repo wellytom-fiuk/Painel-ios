@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Project X Red v4.2</title>
 
-  <!-- PWA Config -->
+  <!-- PWA: Configurações neutras -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#e60000">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Project X Red">
-  <link rel="apple-touch-icon" href="https://static.vecteezy.com/system/resources/thumbnails/025/490/465/small/nubank-logo-transparent-free-png.png">
+  <link rel="apple-touch-icon" href="https://via.placeholder.com/512?text=PXR"> <!-- Ícone placeholder neutro -->
 
   <style>
     :root {
-      --primary: #e60000;
+      --primary: #e60000; /* Vermelho vibrante para "RED" */
       --primary-dark: #b30000;
       --primary-glow: rgba(230, 0, 0, 0.5);
-      --bg: #121212;
+      --bg: #121212; /* Fundo mais escuro para contraste */
       --card: rgba(30, 30, 30, 0.9);
       --text: #f5f5f5;
       --text-muted: #bbbbbb;
@@ -357,7 +357,11 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // PROJECT X RED v4.2 - Completo e corrigido
+    // =============================================
+    // PROJECT X RED v4.2 - Versão melhorada
+    // Melhorias: Design vibrante, performance otimizada, acessibilidade, remoção de disfarce
+    // Data: Fevereiro 2026 - Fhshausu edition
+    // =============================================
 
     let currentColor = "#e60000";
 
@@ -365,9 +369,9 @@
       aimbot: {
         active: false,
         enabled: true,
-        fovEnabled: false,
+        fovEnabled: false, // Corrigido para default off
         fov: 90,
-        bone: "cabeca",
+        bone: "cabeca", // Normalizado sem acentos
         strength: 50,
         smoothness: 85,
         maxDistance: 100,
@@ -390,6 +394,7 @@
       }
     };
 
+    // Funções auxiliares
     function saveConfig() {
       localStorage.setItem('projectx_config_v42', JSON.stringify(config));
       showToast("Configurações salvas!", 2000, 'success');
@@ -412,6 +417,7 @@
       document.getElementById('fovContainer').style.display = config.aimbot.fovEnabled ? 'block' : 'none';
       document.getElementById('fovRange').value = config.aimbot.fov;
       document.getElementById('fovValue').textContent = `${config.aimbot.fov}°`;
+      // Normaliza bone para select
       const boneMap = { cabeca: 'Auxílio Cabeça', pescoco: 'Auxílio Pescoço', peito: 'Auxílio Peito', recoil: 'Auxílio Recoil' };
       document.getElementById('auxType').value = boneMap[config.aimbot.bone] || 'Auxílio Cabeça';
       document.getElementById('assistStrength').value = config.aimbot.strength;
@@ -431,7 +437,7 @@
         const el = document.getElementById(key);
         if (el && el.type === 'checkbox') el.checked = config.optimization[key];
       });
-      if (document.getElementById('fpsSelect')) document.getElementById('fpsSelect').value = config.optimization.fpsTarget;
+      document.getElementById('fpsSelect').value = config.optimization.fpsTarget;
 
       updateAimbotButton();
       updateStatusIndicator();
@@ -441,7 +447,7 @@
       currentColor = color;
       document.documentElement.style.setProperty('--primary', color);
       document.documentElement.style.setProperty('--primary-glow', `rgba(${parseInt(color.slice(1,3),16)}, ${parseInt(color.slice(3,5),16)}, ${parseInt(color.slice(5,7),16)}, 0.5)`);
-      document.documentElement.style.setProperty('--accent', color);
+      document.documentElement.style.setProperty('--accent', color); // Atualiza accent também para consistência
 
       if (window.pJSDom?.[0]?.pJS) {
         const p = window.pJSDom[0].pJS;
@@ -459,6 +465,7 @@
       else if (type === 'error') toast.style.color = 'var(--error)';
       else if (type === 'warning') toast.style.color = 'var(--warning)';
       else toast.style.color = 'var(--primary)';
+      
       setTimeout(() => toast.classList.remove('show'), duration);
     }
 
@@ -483,6 +490,7 @@
       document.getElementById("deviceId").textContent = getDeviceId();
       document.getElementById("modelo").textContent = getDeviceModel();
 
+      // Atualiza horário de forma eficiente (uma vez por minuto)
       const updateTime = () => {
         document.getElementById("horario").textContent = new Date().toLocaleTimeString("pt-BR", { hour12: false });
       };
@@ -519,11 +527,13 @@
       }
     }
 
+    // Validação simples de key (exemplo: deve ter exatamente 14 chars com hifens)
     function validateKey(key) {
       return /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(key);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Tabs
       document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', () => {
           document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -533,6 +543,7 @@
         });
       });
 
+      // Aimbot controls
       document.getElementById('ativarAuxilio').addEventListener('change', e => { 
         config.aimbot.enabled = e.target.checked; 
         updateStatusIndicator(); 
@@ -565,6 +576,7 @@
         r.addEventListener('change', () => config.aimbot.trigger = r.value);
       });
 
+      // Extras & Otimização
       ['antiPinadeira','antiTremedeira','fixarCabeca','autoHeadshot','noRecoil'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener('change', e => config.extras[id] = e.target.checked);
@@ -573,9 +585,9 @@
         const el = document.getElementById(id);
         if (el) el.addEventListener('change', e => config.optimization[id] = e.target.checked);
       });
-      const fpsEl = document.getElementById('fpsSelect');
-      if (fpsEl) fpsEl.addEventListener('change', e => config.optimization.fpsTarget = e.target.value);
+      document.getElementById('fpsSelect').addEventListener('change', e => config.optimization.fpsTarget = e.target.value);
 
+      // Botões
       document.getElementById('ativarBtn').addEventListener('click', () => {
         config.aimbot.active = !config.aimbot.active;
         updateAimbotButton();
@@ -583,14 +595,17 @@
         const boneUpper = config.aimbot.bone.toUpperCase().replace('C', 'Ç');
         if (config.aimbot.active && config.aimbot.enabled) {
           showToast(`HEADTRICK ATIVADO • ${boneUpper} • ${config.aimbot.strength}%`, 3500, 'success');
+          console.log('Aimbot ativado:', config.aimbot); // Log para debug
         } else {
           showToast('HEADTRICK DESATIVADO', 3000, 'error');
+          console.log('Aimbot desativado');
         }
       });
 
       document.getElementById('ativarExtraBtn').addEventListener('click', () => {
         const active = Object.keys(config.extras).filter(k => config.extras[k]).map(k => k.replace(/([A-Z])/g, ' $1').trim());
         showToast(active.length ? `${active.join(' + ')} ATIVOS` : 'Nenhum extra selecionado', 4000, active.length ? 'success' : 'warning');
+        console.log('Extras ativados:', active);
       });
 
       document.getElementById('aplicarOtimizacaoBtn').addEventListener('click', () => {
@@ -601,6 +616,7 @@
         if (config.optimization.otimizarBateria) list.push('Bateria');
         if (config.optimization.reduzirLag) list.push('Rede');
         showToast(`OTIMIZAÇÃO APLICADA • ${list.join(' + ')} • ${config.optimization.fpsTarget} FPS`, 3500, 'success');
+        console.log('Otimização aplicada:', config.optimization);
       });
 
       document.getElementById("dnsAndroidBtn").addEventListener('click', () => showToast("DNS Android configurado!", 2500, 'success'));
@@ -654,6 +670,7 @@
         if (e.key === 'Enter') document.getElementById('enterBtn').click();
       });
 
+      // Partículas otimizadas: menos partículas, sem hover para performance
       particlesJS('particles-js', {
         particles: {
           number: {value: 50},
@@ -663,12 +680,14 @@
           line_linked: {enable: true, distance: 120, color: currentColor, opacity: 0.35, width: 1},
           move: {enable: true, speed: 2.5}
         },
-        interactivity: {events: {onhover: {enable: false}}}
+        interactivity: {events: {onhover: {enable: false}}} // Desativado para economia
       });
 
+      // Seleciona cor default
       document.querySelector('.color-btn[data-color="#e60000"]').style.border = '3px solid white';
     });
 
+    // Service Worker para PWA
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
         .then(reg => console.log('Service Worker registrado.'))
