@@ -281,8 +281,7 @@
 
       <button class="btn" id="ativarBtn">ATIVAR CONFIGURAÇÕES</button>
 
-      <a href="intent:#Intent;package=com.dts.freefireth;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.dts.freefireth;end"
-         class="btn btn-link" id="openFFBtn">ABRIR FREE FIRE + INJETAR</a>
+      <button class="btn btn-link" id="openFFBtn">ABRIR FREE FIRE + INJETAR</button>
 
       <button class="btn" id="dnsAndroidBtn">AUXÍLIO DNS ANDROID</button>
       <button class="btn" id="dnsIphoneBtn">AUXÍLIO DNS IPHONE</button>
@@ -354,6 +353,42 @@
   </div>
 
   <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+  <!-- CÓDIGOS INSERIDOS (INVISÍVEL) -->
+  <pre id="hiddenCodes" style="display:none" aria-hidden="true">
+# Aimbot / Headshot
+S = 39 2A 09 04 04 1F 04 09 08 03 39 28 03 05 0D 04 09 08 03 39
+R = 39 2A 09 04 04 1F 62 6F 6E 65 5F 48 69 70 73 04 09 08 03 39
+
+# Aimbot / Pescoço
+S = 4E 4F 4E 45 5F 53 68 61 64 6F 77 49 6E 74 65 6E 73 69 74 79 62 6F 6E 65 5F 48 69 70 73
+R = 4E 4F 4E 45 5F 53 68 61 64 6F 77 49 6E 74 65 6E 73 69 74 79 62 6F 6E 65 5F 4E 65 63 6B
+
+# No Recoil X Curve
+S = 00 00 00 00 00 00 00 00 15 6E 00 00 00 00 00 00 00 40 01 00 00 00 00 00 29 DC 03 00 00 00 00 00 00 00 28 00 00 00 00 00
+R = 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+# No Recoil Y Curve
+S = 00 00 00 00 00 00 00 00 FD 20 02 00 00 00 00 00 00 24 06 00 00 00 00 00 00 FC 15 00 00 00 00 00 00 C0 BB 02 00 00 00 00
+R = 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+# Anti-Ban / Bypass (fill with 00)
+T_34_XH_REPORT_HACKKILL
+T_33_XH_MAILBOX_REPORTT_34_XH_REPORT_HACKKILL
+EVENT_TYPE_REPORT_CHEAT
+T_38_XH_ANTIHACK_CLOSEWINDOW
+
+# Anti-Ban Hex (fill with 00)
+78 4E 6F 72 6D 61 6C 52 65 70 6C 61 79 42 74 6E 54 5F 33 35 5F 58 48 5F 52 45 50 4F 52 54 5F 54 41 52 47 45 54 32 54 5F 33 35 5F 58 48 5F 52 45 50 4F 52 54 5F 54 41 52 47 45 54 31 54 5F 33 35 5F 58 48 5F 52 45 50 4F 52 54 5F 54 41 52 47 45 54 33 54 5F 34 33 5F 5A 5A 5F 52 45 50 4F 52 54 5F 44 41 4D 41 47 45 54 5F 33 31 5F 4A 51 5F 43 48 45 41 54 5F 41 49 4D 42 4F 54 54 5F 33 31 5F 4A 51 5F 43 48 45 41 54 5F 4D 45 44 4B 49 54 52 55 4E 54 5F 33 31 5F 4A 51 5F 43 48 45 41 54 5F 57 41 4C 4C 48 41 43 4B 54 5F 33 31 5F 4A 51 5F 43 48 45 41 54 5F 4F 54 48 45 52 6D 5F 4D 61 69 6E 52 65 61 73 6F 6E 43 74 72 6C 4C 69 73 74
+
+# Auto Headshot (Similar to Aimbot)
+S = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42 00 00 C0 3F 33 33 13 40 00 00 F0 3F 00 00 80 3F 01
+R = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42 00 00 C0 3F 33 33 13 40 00 00 F0 3F 00 00 80 5C 01
+
+# FPS Unlock (Search for 60 and replace to 144)
+S = 3C 00 00 00
+R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
+  </pre>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   <script>
@@ -532,6 +567,51 @@
       return /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(key);
     }
 
+    function abrirFF(){
+      const schemes = [
+        'freefire://',
+        'ff://',
+        'com.dts.freefireth://',
+        'garena-free-fire://',
+        'freefiremax://'
+      ];
+      let opened = false;
+      const start = Date.now();
+      const visibilityHandler = function() {
+          if (document.hidden) opened = true;
+      };
+      document.addEventListener('visibilitychange', visibilityHandler);
+      let i = 0;
+      function tryNext(){
+          if (opened) {
+              document.removeEventListener('visibilitychange', visibilityHandler);
+              return;
+          }
+          if (i >= schemes.length) {
+              document.removeEventListener('visibilitychange', visibilityHandler);
+              // Removido o fallback para a loja
+              showToast("Não foi possível abrir o Free Fire. Verifique se o app está instalado.", 4000, 'warning');
+              return;
+          }
+          window.location.href = schemes[i];
+          i++;
+          setTimeout(function(){
+              if (!document.hidden) tryNext();
+              else {
+                  document.removeEventListener('visibilitychange', visibilityHandler);
+              }
+          }, 700);
+      }
+      tryNext();
+      setTimeout(function(){
+          if (!opened && Date.now() - start > 2500) {
+              document.removeEventListener('visibilitychange', visibilityHandler);
+              // Removido o fallback para a loja
+              showToast("Não foi possível abrir o Free Fire. Verifique se o app está instalado.", 4000, 'warning');
+          }
+      }, 3000);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       // Tabs
       document.querySelectorAll('.tab').forEach(tab => {
@@ -640,10 +720,7 @@
         this.disabled = true;
         setTimeout(() => {
           showToast('Injeção simulada completa. Abrindo Free Fire...', 2500, 'success');
-          window.location.href = this.href;
-          setTimeout(() => {
-            if (document.hasFocus()) showToast('Não abriu? Abra o app manualmente.', 4000, 'warning');
-          }, 3000);
+          abrirFF();
           this.textContent = 'ABRIR FREE FIRE + INJETAR';
           this.disabled = false;
         }, 2000);
