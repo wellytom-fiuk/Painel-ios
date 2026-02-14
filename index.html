@@ -356,6 +356,90 @@
 
   <!-- CÓDIGOS ATUALIZADOS - OB52 2026 -->
   <pre id="hiddenCodes" style="display:none" aria-hidden="true">
+# ================== BONE OFFSETS META OB52 2026 ==================
+# Base: Player → Avatar → BoneArray
+Head: 0x33C  # Meta absoluta - quase todos os aimbots/headtricks usam esse offset
+Neck: 0x328  # Mais natural em close range, menos snap detectável
+Spine_02: 0x318  # Peito alto - bom para body aim anti-snap
+Spine_01: 0x314  # Centro tronco
+Hip: 0x34C  # Quadril - fallback baixo
+Root: 0x035  # Raiz skeleton
+RightHand: 0x364  # Mão direita (para armas)
+LeftHand: 0x368  # Mão esquerda
+RightShoulder: 0x374
+LeftShoulder: 0x370
+
+# Pointer Chain: Como achar BoneArray dinamicamente (Frida/GG/Injector)
+# Step 1: libil2cpp.so base
+# Step 2: + AvatarManager offset (\~0x1A00000 a 0x2A00000, scan por string ou sig)
+# Step 3: + 0x3A4 → LocalAvatar
+# Step 4: + 0x8C → BoneArray base
+# Step 5: + offset do bone desejado (ex: +0x33C = Head)
+# Tip: Signature comum para scan: "GetBoneTransform" ou "BoneMatrix" function
+
+# ================== MAGIC BULLET / HIT REGISTRATION / BULLET SPAWN ==================
+# Modifica spawn da bala ou offset de hit registration (funciona melhor em low-recoil weapons)
+# Float Chain Search Near Floats: 3.1415926535 1.000000 0.500000 2.000000 100.000000
+# Set Floats: 0.000000 0.000000 0.000000 0.000000 9999.000000
+# Pointer chain alternativa: Weapon → BulletSpawnOffset → X/Y/Z floats
+
+# Spread Deviation Zero
+S = 42 C8 00 00 42 48 00 00 ?? ?? ?? ?? 42 70 00 00
+R = 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+# Zera spread horizontal/vertical + deviation. Mais efetivo em SMG/AR. High-recoil patched em OB52.
+
+# ================== NO RECOIL / RECOIL CONTROL AVANÇADO ==================
+# RecoilPattern → Multipliers array (geralmente 64 a 200 floats)
+# Search Example Bytes: 3F 80 00 00 3F 00 00 00 3E 80 00 00 3E 00 00 00
+# Replace All Bytes: 00 00 00 00
+# Zere todos os multipliers X/Y para redução total. Use 80-92% redução para naturalidade.
+
+# Pointer Chain Recoil
+# Step 1: LocalPlayer + Weapon offset (\~0x2E0 a 0x340)
+# Step 2: + WeaponData (\~0x44)
+# Step 3: + RecoilStruct (\~0xC a 0x20)
+# Step 4: + Multipliers base
+# Tip: Reduza 85-95% (nunca 100%) + smoothness alto para evitar detecção.
+
+# ================== AIMLOCK / HEADTRICK + CAMERA / VIEW SETUP ==================
+# View Matrix: FollowCamera + 0x334 → Camera + 0x98 + 0x2 (ViewMatrix 4x4 padrão - use para world-to-screen)
+# Aim Rotation Offset: 0x2EC
+# Main Camera Transform Offset: 0x150
+
+# Lock Parameters
+# Strength: default=0.82, recommended_range=0.68-0.93 (0.68-0.93 = natural, >0.95 = snap detectável)
+# FOV Dynamic: min=65, max=165, default=105 (Ajuste por mapa/modo - BR 105-120 comum)
+# Max Lock Distance: default=120, unit=metros (120-150m ideal para BR)
+# Trigger Type: default=olhar, options=olhar / atirar
+
+# ================== ANTI-BAN COMPORTAMENTAL 2026 ==================
+# Regras Obrigatórias:
+# Headshot rate ≤ 65% em partidas >8 minutos
+# K/D médio ≤ 4.2 kills por minuto em ranqueada
+# Smoothness aleatório entre 72% e 94% por partida
+# Ative/desative o aim a cada 3–14 minutos (random)
+# Redução de recoil 80–92% (nunca 100% fixo)
+# Varie bone: 60% Head, 30% Neck, 10% Spine/Peito
+# Evite 100% head em scoped weapons (use body em AR/SR)
+# Não use aim em todas as kills seguidas (varie manual)
+# Aviso Crítico: RASP + server-side ML detecta padrões fixos, hitrate anormal e recoil zerado. Bypass real = spoof de stats + timing random + low profile. Strings null não funcionam mais.
+
+# ================== FPS UNLOCK + PERFORMANCE HIGH-END ==================
+# Frame Cap Bypass
+S = 3C 00 00 00 3F 80 00 00
+R = A5 00 00 00 00 00 00 00
+# 60 FPS → 165 FPS (high-end devices). Pode causar instabilidade ou frame check ban.
+
+# Dicas Extras:
+# Limpar cache profundo + fechar todos apps background
+# Boost RAM via ADB ou app otimizador antes de injetar
+# Otimizar bateria + reduzir lag de rede (DNS custom se possível)
+
+# FIM DO ARQUIVO - META 2026
+# Sempre: Dump novo do dia → Il2CppDumper → pointer scan → teste em treino
+# Boa sorte no OB52. Jogue inteligente.
+
+# ================== CÓDIGOS EXISTENTES (ANTIGOS) - MANTER PARA COMPATIBILIDADE ==================
 # Aimbot / Headshot (OB52 2026 - bone_Head byte pattern)
 S = 39 2A 09 04 04 1F 04 09 08 03 39 28 03 05 0D 04 09 08 03 39
 R = 39 2A 09 04 04 1F 62 6F 6E 65 5F 48 65 61 64 04 09 08 03 39
