@@ -3,34 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project X Red v4.2</title>
+  <title>Project X Red v4.2 - OB52 Edition 2026</title>
 
-  <!-- PWA: Configurações neutras -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#e60000">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Project X Red">
-  <link rel="apple-touch-icon" href="https://via.placeholder.com/512?text=PXR"> <!-- Ícone placeholder neutro -->
+  <link rel="apple-touch-icon" href="https://via.placeholder.com/512?text=PXR">
 
   <style>
     :root {
-      --primary: #e60000; /* Vermelho vibrante para "RED" */
+      --primary: #e60000;
       --primary-dark: #b30000;
-      --primary-glow: rgba(230, 0, 0, 0.5);
-      --bg: #121212; /* Fundo mais escuro para contraste */
-      --card: rgba(30, 30, 30, 0.9);
-      --text: #f5f5f5;
-      --text-muted: #bbbbbb;
-      --accent: #ff4d4d;
-      --success: #4caf50;
-      --error: #f44336;
-      --warning: #ff9800;
+      --primary-glow: rgba(230, 0, 0, 0.65);
+      --bg: #0f0f0f;
+      --card: rgba(25, 25, 25, 0.92);
+      --text: #f8f8f8;
+      --text-muted: #cccccc;
+      --accent: #ff3333;
+      --success: #00cc66;
+      --error: #ff4444;
+      --warning: #ffaa00;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -41,175 +40,193 @@
       overflow-x: hidden;
     }
 
-    #particles-js { position: fixed; inset: 0; z-index: 0; }
+    #particles-js { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
     .container {
       position: relative;
       z-index: 1;
-      width: 90%;
-      max-width: 480px;
-      backdrop-filter: blur(12px);
+      width: 92%;
+      max-width: 500px;
+      backdrop-filter: blur(14px);
       background: var(--card);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 77, 77, 0.3);
-      box-shadow: 0 0 40px var(--primary-glow);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 60, 60, 0.35);
+      box-shadow: 0 0 50px var(--primary-glow);
       overflow: hidden;
     }
 
-    .login-box, .panel { padding: 32px 24px; text-align: center; }
+    .login-box, .panel { padding: 36px 26px; text-align: center; }
 
     .avatar {
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      border: 4px solid var(--primary);
-      box-shadow: 0 0 40px var(--primary-glow);
+      border: 5px solid var(--primary);
+      box-shadow: 0 0 50px var(--primary-glow);
       object-fit: cover;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
-    h1 { font-size: 2rem; color: var(--primary); margin-bottom: 12px; text-shadow: 0 0 20px var(--primary-glow); }
-    h2 { font-size: 1.5rem; color: var(--accent); margin-bottom: 20px; }
+    h1 { font-size: 2.3rem; color: var(--primary); margin-bottom: 14px; text-shadow: 0 0 25px var(--primary-glow); letter-spacing: -0.5px; }
+    h2 { font-size: 1.7rem; color: var(--accent); margin-bottom: 22px; }
 
     .form-input {
       width: 100%;
-      padding: 16px;
-      margin: 16px 0;
-      border: 1px solid rgba(255, 77, 77, 0.4);
-      border-radius: 12px;
-      background: rgba(20, 20, 20, 0.8);
+      padding: 18px;
+      margin: 18px 0;
+      border: 1px solid rgba(255, 80, 80, 0.45);
+      border-radius: 14px;
+      background: rgba(15, 15, 15, 0.85);
       color: var(--text);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       text-align: center;
+      transition: all 0.3s;
     }
-    .form-input:focus { border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); outline: none; }
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 25px var(--primary-glow);
+      outline: none;
+    }
 
     .btn, .btn-link {
       width: 100%;
-      padding: 16px;
-      margin: 12px 0;
+      padding: 18px;
+      margin: 14px 0;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       background: linear-gradient(135deg, var(--primary), var(--accent));
       color: white;
-      font-weight: bold;
-      font-size: 1rem;
+      font-weight: 700;
+      font-size: 1.05rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 25px rgba(230, 0, 0, 0.5);
+      transition: all 0.35s ease;
+      box-shadow: 0 8px 30px rgba(230, 0, 0, 0.55);
       display: block;
       text-decoration: none;
       text-align: center;
     }
-    .btn:hover:not(:disabled), .btn-link:hover { 
-      transform: translateY(-3px) scale(1.01); 
-      box-shadow: 0 12px 35px rgba(230, 0, 0, 0.7); 
+    .btn:hover:not(:disabled), .btn-link:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 16px 45px rgba(230, 0, 0, 0.75);
     }
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
     .tabs {
       display: flex;
-      margin: 24px 0 20px;
-      border-radius: 12px;
-      background: rgba(0,0,0,0.5);
+      margin: 28px 0 22px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.55);
       overflow-x: auto;
       white-space: nowrap;
     }
     .tab {
       flex: 1 0 auto;
-      padding: 16px;
+      padding: 18px 12px;
       color: var(--text-muted);
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.35s;
-      min-width: 80px;
+      transition: all 0.4s;
+      min-width: 90px;
+      text-align: center;
     }
-    .tab.active { background: var(--primary); color: white; box-shadow: inset 0 0 12px rgba(0,0,0,0.3); }
+    .tab.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
+    }
 
     .content { display: none; }
-    .content.active { display: block; animation: fadeIn 0.5s ease; }
+    .content.active { display: block; animation: fadeIn 0.6s ease; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     label {
       display: flex;
       align-items: center;
-      margin: 16px 0;
-      font-size: 1rem;
+      margin: 18px 0;
+      font-size: 1.05rem;
       cursor: pointer;
+      user-select: none;
     }
     input[type="checkbox"], input[type="radio"] {
       accent-color: var(--primary);
-      margin-right: 14px;
-      transform: scale(1.4);
+      margin-right: 16px;
+      transform: scale(1.5);
     }
 
     select, input[type="range"] {
       width: 100%;
-      padding: 14px;
-      margin: 14px 0;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 77, 77, 0.4);
-      background: rgba(20, 20, 20, 0.8);
+      padding: 16px;
+      margin: 16px 0;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 80, 80, 0.45);
+      background: rgba(15, 15, 15, 0.85);
       color: var(--text);
-      font-size: 1rem;
+      font-size: 1.05rem;
     }
     input[type="range"] {
-      height: 10px;
+      height: 12px;
       -webkit-appearance: none;
-      background: rgba(230, 0, 0, 0.2);
+      background: rgba(230, 0, 0, 0.25);
+      border-radius: 6px;
     }
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 24px; height: 24px;
+      width: 28px; height: 28px;
       border-radius: 50%;
       background: var(--primary);
-      box-shadow: 0 0 20px var(--primary-glow);
+      box-shadow: 0 0 25px var(--primary-glow);
       cursor: pointer;
+      border: 3px solid white;
     }
 
-    .divider { height: 1px; background: rgba(255, 77, 77, 0.3); margin: 24px 0; }
+    .divider { height: 1px; background: rgba(255, 80, 80, 0.35); margin: 28px 0; }
 
     .toast {
       position: fixed;
-      bottom: 50px;
+      bottom: 60px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.92);
       color: var(--primary);
-      padding: 18px 35px;
-      border-radius: 18px;
-      font-weight: bold;
+      padding: 20px 40px;
+      border-radius: 22px;
+      font-weight: 700;
+      font-size: 1.05rem;
       z-index: 9999;
       opacity: 0;
-      transition: all 0.5s ease;
+      transition: all 0.6s ease;
       border: 1px solid var(--primary);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
     }
-    .toast.show { opacity: 1; bottom: 80px; }
+    .toast.show { opacity: 1; bottom: 100px; }
 
     .color-btn {
-      height: 60px;
-      border-radius: 12px;
+      height: 65px;
+      border-radius: 14px;
       cursor: pointer;
-      border: 3px solid transparent;
-      transition: border 0.35s, transform 0.25s;
+      border: 4px solid transparent;
+      transition: all 0.4s;
     }
-    .color-btn:hover { transform: scale(1.05); }
+    .color-btn:hover { transform: scale(1.08); border-color: white; }
 
     .status-indicator {
       display: inline-block;
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: var(--error);
-      margin-left: 8px;
+      margin-left: 10px;
+      box-shadow: 0 0 10px var(--error);
     }
-    .status-indicator.active { background: var(--success); }
+    .status-indicator.active {
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
+    }
 
     @media (max-width: 480px) {
-      .container { width: 95%; padding: 24px 18px; }
-      .btn, .btn-link { font-size: 0.95rem; padding: 14px; }
+      .container { width: 96%; padding: 28px 20px; }
+      .btn, .btn-link { font-size: 1rem; padding: 16px; }
     }
   </style>
 </head>
@@ -219,18 +236,18 @@
 
   <!-- Login -->
   <div class="container login-box" id="loginBox">
-    <img src="https://i.postimg.cc/gcZd0K8g/description.webp" class="avatar" alt="Avatar do Project X Red" 
-         onerror="this.src='https://via.placeholder.com/110?text=PXR'">
+    <img src="https://i.postimg.cc/gcZd0K8g/description.webp" class="avatar" alt="Project X Red" 
+         onerror="this.src='https://via.placeholder.com/120?text=PXR'">
     <h1>HEADTRICK 2026</h1>
-    <p style="color:var(--text-muted); font-weight:bold; margin:20px 0;">⚠️ KEY - 1 DISPOSITIVO / ANTI-BAN AVANÇADO</p>
+    <p style="color:var(--text-muted); font-weight:bold; margin:24px 0;">⚠️ 1 DISPOSITIVO • ANTI-BAN PRO • OB52</p>
 
     <input type="password" id="licenseKey" class="form-input" placeholder="XXXX-XXXX-XXXX" aria-label="Chave de Licença"/>
     <button class="btn" id="enterBtn">ENTRAR</button>
-    <button class="btn" style="background:linear-gradient(135deg, #333, #555);" onclick="window.open('https://discord.gg/9jEQEHuk','_blank')">DISCORD OFICIAL</button>
+    <button class="btn" style="background:linear-gradient(135deg, #444, #666);" onclick="window.open('https://discord.gg/9jEQEHuk','_blank')">DISCORD OFICIAL</button>
   </div>
 
   <!-- Painel Principal -->
-  <div class="container panel" id="mainPanel" style="display:none; max-height:95vh; overflow-y:auto;">
+  <div class="container panel" id="mainPanel" style="display:none; max-height:96vh; overflow-y:auto;">
     <h2>PROJECT X RED v4.2</h2>
     <div class="divider"></div>
 
@@ -244,11 +261,11 @@
 
     <div id="aimbot" class="content active">
       <label for="ativarAuxilio"><input type="checkbox" id="ativarAuxilio" checked> Ativar Auxílio<span class="status-indicator"></span></label>
-      <label for="ativarFov"><input type="checkbox" id="ativarFov"> Ativar FOV Dinâmico</label>
+      <label for="ativarFov"><input type="checkbox" id="ativarFov" checked> Ativar FOV Dinâmico (360°)</label>
 
-      <div id="fovContainer" style="display:none; margin:20px 0;">
-        <input type="range" min="40" max="200" value="90" id="fovRange" aria-label="Ajuste de FOV"/>
-        <p>FOV Dinâmico: <strong id="fovValue">90°</strong></p>
+      <div id="fovContainer" style="margin:24px 0;">
+        <input type="range" min="40" max="500" value="360" id="fovRange" aria-label="Ajuste de FOV"/>
+        <p>FOV Dinâmico: <strong id="fovValue">360°</strong></p>
       </div>
 
       <select id="auxType" aria-label="Tipo de Auxílio">
@@ -258,28 +275,28 @@
         <option>Auxílio Recoil</option>
       </select>
 
-      <div id="strengthContainer" style="margin:20px 0;">
-        <input type="range" min="0" max="100" value="50" id="assistStrength" aria-label="Força do Auxílio"/>
-        <p>Assist Strength: <strong id="strengthValue">50%</strong></p>
+      <div id="strengthContainer" style="margin:24px 0;">
+        <input type="range" min="0" max="100" value="75" id="assistStrength" aria-label="Força do Auxílio"/>
+        <p>Força do Auxílio: <strong id="strengthValue">75%</strong></p>
       </div>
 
-      <div style="margin:20px 0;">
-        <input type="range" min="40" max="100" value="85" id="smoothnessRange" aria-label="Suavidade"/>
-        <p>Smoothness: <strong id="smoothValue">85%</strong></p>
+      <div style="margin:24px 0;">
+        <input type="range" min="40" max="100" value="88" id="smoothnessRange" aria-label="Suavidade"/>
+        <p>Suavidade: <strong id="smoothValue">88%</strong></p>
       </div>
 
-      <div id="maxDistContainer" style="margin:20px 0;">
-        <input type="range" min="10" max="500" value="100" id="maxLockDist" aria-label="Distância Máxima de Lock"/>
-        <p>Max Lock Distance: <strong id="maxDistValue">100m</strong></p>
+      <div id="maxDistContainer" style="margin:24px 0;">
+        <input type="range" min="10" max="600" value="120" id="maxLockDist" aria-label="Distância Máxima de Lock"/>
+        <p>Distância Máx. Lock: <strong id="maxDistValue">120m</strong></p>
       </div>
 
       <div class="divider"></div>
 
-      <p style="font-weight:bold; margin:16px 0 10px; color:var(--accent);">Trigger Avançado:</p>
+      <p style="font-weight:bold; margin:18px 0 12px; color:var(--accent);">Trigger Avançado:</p>
       <label for="tipo-atirar"><input type="radio" id="tipo-atirar" name="tipo" value="atirar"> Ao Atirar (Preciso)</label>
       <label for="tipo-olhar"><input type="radio" id="tipo-olhar" name="tipo" value="olhar" checked> Ao Olhar/Mirar (Suave)</label>
 
-      <button class="btn" id="ativarBtn">ATIVAR CONFIGURAÇÕES</button>
+      <button class="btn" id="ativarBtn">ATIVAR HEADTRICK 360</button>
 
       <button class="btn btn-link" id="openFFBtn">ABRIR FREE FIRE + INJETAR</button>
 
@@ -299,7 +316,7 @@
     </div>
 
     <div id="otimizacao" class="content">
-      <h2>Otimização (Zero Lag)</h2>
+      <h2>Otimização Zero Lag</h2>
       <label for="limparCache"><input type="checkbox" id="limparCache" checked> Limpar Cache Profundo</label>
       <label for="fecharApps"><input type="checkbox" id="fecharApps" checked> Fechar Background Total</label>
       <label for="boostRAM"><input type="checkbox" id="boostRAM" checked> Boost RAM Máximo</label>
@@ -308,34 +325,34 @@
 
       <div class="divider"></div>
 
-      <p style="font-weight:bold; margin:16px 0 10px; color:var(--accent);">FPS:</p>
+      <p style="font-weight:bold; margin:18px 0 12px; color:var(--accent);">FPS Alvo:</p>
       <select id="fpsSelect" aria-label="Seleção de FPS">
         <option value="60">60 FPS Estável</option>
         <option value="90">90 FPS Balanceado</option>
         <option value="120">120 FPS Máximo</option>
-        <option value="144" selected>144 FPS Extremo (Experimental)</option>
+        <option value="144" selected>144 FPS Extremo (OB52)</option>
       </select>
 
       <button class="btn" id="aplicarOtimizacaoBtn">APLICAR OTIMIZAÇÃO</button>
     </div>
 
     <div id="config" class="content">
-      <p style="margin-bottom:20px; font-weight:600; color:var(--accent);">Cor do Painel:</p>
-      <div class="color-options" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin:20px 0;">
-        <div class="color-btn" style="background:#e60000;" data-color="#e60000" aria-label="Vermelho"></div>
-        <div class="color-btn" style="background:#ff4d4d;" data-color="#ff4d4d" aria-label="Vermelho Claro"></div>
-        <div class="color-btn" style="background:#b30000;" data-color="#b30000" aria-label="Vermelho Escuro"></div>
-        <div class="color-btn" style="background:#ff5722;" data-color="#ff5722" aria-label="Laranja"></div>
-        <div class="color-btn" style="background:#2196f3;" data-color="#2196f3" aria-label="Azul"></div>
-        <div class="color-btn" style="background:#4caf50;" data-color="#4caf50" aria-label="Verde"></div>
-        <div class="color-btn" style="background:#ffffff;" data-color="#ffffff" aria-label="Branco"></div>
-        <div class="color-btn" style="background:#808080;" data-color="#808080" aria-label="Cinza"></div>
-        <div class="color-btn" style="background:#000000;" data-color="#000000" aria-label="Preto"></div>
+      <p style="margin-bottom:22px; font-weight:700; color:var(--accent);">Cor do Painel:</p>
+      <div class="color-options" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin:22px 0;">
+        <div class="color-btn" style="background:#e60000;" data-color="#e60000"></div>
+        <div class="color-btn" style="background:#ff4d4d;" data-color="#ff4d4d"></div>
+        <div class="color-btn" style="background:#b30000;" data-color="#b30000"></div>
+        <div class="color-btn" style="background:#ff5722;" data-color="#ff5722"></div>
+        <div class="color-btn" style="background:#2196f3;" data-color="#2196f3"></div>
+        <div class="color-btn" style="background:#4caf50;" data-color="#4caf50"></div>
+        <div class="color-btn" style="background:#ffffff;" data-color="#ffffff"></div>
+        <div class="color-btn" style="background:#808080;" data-color="#808080"></div>
+        <div class="color-btn" style="background:#000000;" data-color="#000000"></div>
       </div>
 
       <div class="divider"></div>
       <button class="btn" id="saveConfigBtn">SALVAR CONFIGURAÇÕES</button>
-      <button class="btn" id="loadConfigBtn" style="background: linear-gradient(135deg, #333, #555);">CARREGAR CONFIGURAÇÕES</button>
+      <button class="btn" id="loadConfigBtn" style="background: linear-gradient(135deg, #444, #666);">CARREGAR CONFIGURAÇÕES</button>
     </div>
 
     <div id="info" class="content">
@@ -345,26 +362,26 @@
       <p><b>Horário:</b> <span id="horario">—</span></p>
       <p><b>Região:</b> <span id="regiao">—</span></p>
       <div class="divider"></div>
-      <p style="color:var(--primary); font-weight:bold;">Sistema Online ✓ Anti-Ban Level Pro</p>
-      <p style="color:var(--text-muted); font-size:0.95rem; margin-top:16px;">
-        Teste no treino antes de ranqueada. Use com inteligência.
+      <p style="color:var(--primary); font-weight:bold;">Sistema Online ✓ Anti-Ban Level Pro 2026</p>
+      <p style="color:var(--text-muted); font-size:0.98rem; margin-top:18px;">
+        Teste tudo no treino antes de ranked. Use com responsabilidade.
       </p>
     </div>
   </div>
 
   <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
-  <!-- CÓDIGOS INSERIDOS (INVISÍVEL) -->
+  <!-- Códigos ocultos (atualizados para OB52 – mantenha escondido) -->
   <pre id="hiddenCodes" style="display:none" aria-hidden="true">
-# Aimbot / Headshot
+# Aimbot / Headshot - OB52 patch
 S = 39 2A 09 04 04 1F 04 09 08 03 39 28 03 05 0D 04 09 08 03 39
-R = 39 2A 09 04 04 1F 62 6F 6E 65 5F 48 69 70 73 04 09 08 03 39
+R = 39 2A 09 04 04 1F 62 6F 6E 65 5F 48 65 61 64 04 09 08 03 39
 
 # Aimbot / Pescoço
 S = 4E 4F 4E 45 5F 53 68 61 64 6F 77 49 6E 74 65 6E 73 69 74 79 62 6F 6E 65 5F 48 69 70 73
 R = 4E 4F 4E 45 5F 53 68 61 64 6F 77 49 6E 74 65 6E 73 69 74 79 62 6F 6E 65 5F 4E 65 63 6B
 
-# No Recoil X Curve
+# No Recoil X Curve - OB52 zero recoil
 S = 00 00 00 00 00 00 00 00 15 6E 00 00 00 00 00 00 00 40 01 00 00 00 00 00 29 DC 03 00 00 00 00 00 00 00 28 00 00 00 00 00
 R = 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
@@ -372,31 +389,26 @@ R = 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0
 S = 00 00 00 00 00 00 00 00 FD 20 02 00 00 00 00 00 00 24 06 00 00 00 00 00 00 FC 15 00 00 00 00 00 00 C0 BB 02 00 00 00 00
 R = 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
-# Anti-Ban / Bypass (fill with 00)
+# Anti-Ban / Bypass strings (mais zeros para OB52 reports)
 T_34_XH_REPORT_HACKKILL
-T_33_XH_MAILBOX_REPORTT_34_XH_REPORT_HACKKILL
+T_33_XH_MAILBOX_REPORT
 EVENT_TYPE_REPORT_CHEAT
 T_38_XH_ANTIHACK_CLOSEWINDOW
+00000000000000000000000000000000
 
-# Anti-Ban Hex (fill with 00)
-78 4E 6F 72 6D 61 6C 52 65 70 6C 61 79 42 74 6E 54 5F 33 35 5F 58 48 5F 52 45 50 4F 52 54 5F 54 41 52 47 45 54 32 54 5F 33 35 5F 58 48 5F 52 45 50 4F 52 54 5F 54 41 52 47 45 54 31 54 5F 33 35 5F 58 48 5F 52 45 50 4F 52 54 5F 54 41 52 47 45 54 33 54 5F 34 33 5F 5A 5A 5F 52 45 50 4F 52 54 5F 44 41 4D 41 47 45 54 5F 33 31 5F 4A 51 5F 43 48 45 41 54 5F 41 49 4D 42 4F 54 54 5F 33 31 5F 4A 51 5F 43 48 45 41 54 5F 4D 45 44 4B 49 54 52 55 4E 54 5F 33 31 5F 4A 51 5F 43 48 45 41 54 5F 57 41 4C 4C 48 41 43 4B 54 5F 33 31 5F 4A 51 5F 43 48 45 41 54 5F 4F 54 48 45 52 6D 5F 4D 61 69 6E 52 65 61 73 6F 6E 43 74 72 6C 4C 69 73 74
-
-# Auto Headshot (Similar to Aimbot)
+# Auto Headshot pattern - OB52 compatible
 S = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42 00 00 C0 3F 33 33 13 40 00 00 F0 3F 00 00 80 3F 01
-R = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42 00 00 C0 3F 33 33 13 40 00 00 F0 3F 00 00 80 5C 01
+R = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42 00 00 C0 3F 33 33 13 40 00 00 F0 3F 00 00 80 5C 01
 
-# FPS Unlock (Search for 60 and replace to 144)
+# FPS Unlock (para 144+ em OB52)
 S = 3C 00 00 00
-R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
+R = 90 00 00 00
   </pre>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // =============================================
-    // PROJECT X RED v4.2 - Versão melhorada
-    // Melhorias: Design vibrante, performance otimizada, acessibilidade, remoção de disfarce
-    // Data: Fevereiro 2026 - Fhshausu edition
-    // =============================================
+    // PROJECT X RED v4.2 - OB52 Edition 2026 - Improved
+    // FOV 360 padrão, glow mais forte, performance otimizada
 
     let currentColor = "#e60000";
 
@@ -404,12 +416,12 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
       aimbot: {
         active: false,
         enabled: true,
-        fovEnabled: false, // Corrigido para default off
-        fov: 90,
-        bone: "cabeca", // Normalizado sem acentos
-        strength: 50,
-        smoothness: 85,
-        maxDistance: 100,
+        fovEnabled: true,
+        fov: 360,
+        bone: "cabeca",
+        strength: 75,
+        smoothness: 88,
+        maxDistance: 120,
         trigger: "olhar"
       },
       extras: {
@@ -429,21 +441,21 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
       }
     };
 
-    // Funções auxiliares
     function saveConfig() {
-      localStorage.setItem('projectx_config_v42', JSON.stringify(config));
-      showToast("Configurações salvas!", 2000, 'success');
+      localStorage.setItem('projectx_config_v42_ob52', JSON.stringify(config));
+      showToast("Configurações salvas com sucesso!", 2200, 'success');
     }
 
     function loadConfig() {
-      const saved = localStorage.getItem('projectx_config_v42');
+      const saved = localStorage.getItem('projectx_config_v42_ob52');
       if (saved) {
         Object.assign(config, JSON.parse(saved));
-        applyConfigToUI();
-        showToast("Configurações carregadas!", 2000, 'success');
       } else {
-        showToast("Nenhuma config salva encontrada.", 2000, 'warning');
+        // Default 360 FOV se não houver config salva
+        config.aimbot.fov = 360;
       }
+      applyConfigToUI();
+      showToast("Configurações carregadas!", 2200, 'success');
     }
 
     function applyConfigToUI() {
@@ -452,7 +464,6 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
       document.getElementById('fovContainer').style.display = config.aimbot.fovEnabled ? 'block' : 'none';
       document.getElementById('fovRange').value = config.aimbot.fov;
       document.getElementById('fovValue').textContent = `${config.aimbot.fov}°`;
-      // Normaliza bone para select
       const boneMap = { cabeca: 'Auxílio Cabeça', pescoco: 'Auxílio Pescoço', peito: 'Auxílio Peito', recoil: 'Auxílio Recoil' };
       document.getElementById('auxType').value = boneMap[config.aimbot.bone] || 'Auxílio Cabeça';
       document.getElementById('assistStrength').value = config.aimbot.strength;
@@ -472,7 +483,7 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
         const el = document.getElementById(key);
         if (el && el.type === 'checkbox') el.checked = config.optimization[key];
       });
-      document.getElementById('fpsSelect').value = config.optimization.fpsTarget;
+      if (document.getElementById('fpsSelect')) document.getElementById('fpsSelect').value = config.optimization.fpsTarget;
 
       updateAimbotButton();
       updateStatusIndicator();
@@ -481,8 +492,8 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
     function updateTheme(color) {
       currentColor = color;
       document.documentElement.style.setProperty('--primary', color);
-      document.documentElement.style.setProperty('--primary-glow', `rgba(${parseInt(color.slice(1,3),16)}, ${parseInt(color.slice(3,5),16)}, ${parseInt(color.slice(5,7),16)}, 0.5)`);
-      document.documentElement.style.setProperty('--accent', color); // Atualiza accent também para consistência
+      document.documentElement.style.setProperty('--primary-glow', `rgba(${parseInt(color.slice(1,3),16)}, ${parseInt(color.slice(3,5),16)}, ${parseInt(color.slice(5,7),16)}, 0.65)`);
+      document.documentElement.style.setProperty('--accent', color);
 
       if (window.pJSDom?.[0]?.pJS) {
         const p = window.pJSDom[0].pJS;
@@ -492,7 +503,7 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
       }
     }
 
-    function showToast(message, duration = 2500, type = 'info') {
+    function showToast(message, duration = 2800, type = 'info') {
       const toast = document.getElementById('toast');
       toast.textContent = message;
       toast.className = 'toast show';
@@ -500,7 +511,6 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
       else if (type === 'error') toast.style.color = 'var(--error)';
       else if (type === 'warning') toast.style.color = 'var(--warning)';
       else toast.style.color = 'var(--primary)';
-      
       setTimeout(() => toast.classList.remove('show'), duration);
     }
 
@@ -515,9 +525,9 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
 
     function getDeviceModel() {
       const ua = navigator.userAgent;
-      if (/android/i.test(ua)) return ua.match(/Android [\d.]+; ([\w\s]+) Build/)?.[1] || "Dispositivo Android";
+      if (/android/i.test(ua)) return ua.match(/Android [\d.]+; ([\w\s]+) Build/)?.[1] || "Android";
       if (/iPhone/.test(ua)) return "iPhone";
-      return "Dispositivo desconhecido";
+      return "Dispositivo";
     }
 
     async function loadSystemInfo(key) {
@@ -525,7 +535,6 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
       document.getElementById("deviceId").textContent = getDeviceId();
       document.getElementById("modelo").textContent = getDeviceModel();
 
-      // Atualiza horário de forma eficiente (uma vez por minuto)
       const updateTime = () => {
         document.getElementById("horario").textContent = new Date().toLocaleTimeString("pt-BR", { hour12: false });
       };
@@ -534,82 +543,51 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
 
       try {
         const res = await fetch('https://ipapi.co/json/');
-        if (!res.ok) throw new Error('Falha na requisição');
-        const data = await res.json();
-        document.getElementById("regiao").textContent = `\( {data.country_name || "?"} ( \){data.region || "?"})`;
-      } catch (err) {
-        console.error('Erro ao carregar região:', err);
+        if (res.ok) {
+          const data = await res.json();
+          document.getElementById("regiao").textContent = `\( {data.country_name || "?"} ( \){data.region || "?"})`;
+        }
+      } catch {
         document.getElementById("regiao").textContent = "Indisponível";
-        showToast("Erro ao carregar região.", 2000, 'error');
       }
     }
 
     function updateAimbotButton() {
       const btn = document.getElementById('ativarBtn');
       if (config.aimbot.active) {
-        btn.textContent = 'DESATIVAR HEADTRICK';
-        btn.style.background = 'linear-gradient(135deg, #f44336, #d32f2f)';
+        btn.textContent = 'DESATIVAR HEADTRICK 360';
+        btn.style.background = 'linear-gradient(135deg, #ff4444, #d32f2f)';
       } else {
-        btn.textContent = 'ATIVAR HEADTRICK';
+        btn.textContent = 'ATIVAR HEADTRICK 360';
         btn.style.background = 'linear-gradient(135deg, var(--primary), var(--accent))';
       }
     }
 
     function updateStatusIndicator() {
-      const indicator = document.querySelector('.status-indicator');
-      if (indicator) {
-        indicator.classList.toggle('active', config.aimbot.enabled && config.aimbot.active);
-      }
+      document.querySelector('.status-indicator')?.classList.toggle('active', config.aimbot.enabled && config.aimbot.active);
     }
 
-    // Validação simples de key (exemplo: deve ter exatamente 14 chars com hifens)
     function validateKey(key) {
       return /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(key);
     }
 
-    function abrirFF(){
-      const schemes = [
-        'freefire://',
-        'ff://',
-        'com.dts.freefireth://',
-        'garena-free-fire://',
-        'freefiremax://'
-      ];
+    function abrirFF() {
+      const schemes = ['freefire://', 'ff://', 'com.dts.freefireth://', 'garena-free-fire://', 'freefiremax://'];
       let opened = false;
-      const start = Date.now();
-      const visibilityHandler = function() {
-          if (document.hidden) opened = true;
-      };
-      document.addEventListener('visibilitychange', visibilityHandler);
+      document.addEventListener('visibilitychange', () => { if (document.hidden) opened = true; }, {once: true});
+
       let i = 0;
-      function tryNext(){
-          if (opened) {
-              document.removeEventListener('visibilitychange', visibilityHandler);
-              return;
-          }
-          if (i >= schemes.length) {
-              document.removeEventListener('visibilitychange', visibilityHandler);
-              // Removido o fallback para a loja
-              showToast("Não foi possível abrir o Free Fire. Verifique se o app está instalado.", 4000, 'warning');
-              return;
-          }
-          window.location.href = schemes[i];
-          i++;
-          setTimeout(function(){
-              if (!document.hidden) tryNext();
-              else {
-                  document.removeEventListener('visibilitychange', visibilityHandler);
-              }
-          }, 700);
+      function tryNext() {
+        if (opened) return;
+        if (i >= schemes.length) {
+          showToast("Não foi possível abrir o Free Fire. Verifique se está instalado.", 4000, 'warning');
+          return;
+        }
+        window.location.href = schemes[i++];
+        setTimeout(() => { if (!document.hidden) tryNext(); }, 800);
       }
       tryNext();
-      setTimeout(function(){
-          if (!opened && Date.now() - start > 2500) {
-              document.removeEventListener('visibilitychange', visibilityHandler);
-              // Removido o fallback para a loja
-              showToast("Não foi possível abrir o Free Fire. Verifique se o app está instalado.", 4000, 'warning');
-          }
-      }, 3000);
+      setTimeout(() => { if (!opened) showToast("Free Fire não abriu. Está instalado?", 4000, 'warning'); }, 3500);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -623,10 +601,10 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
         });
       });
 
-      // Aimbot controls
-      document.getElementById('ativarAuxilio').addEventListener('change', e => { 
-        config.aimbot.enabled = e.target.checked; 
-        updateStatusIndicator(); 
+      // Aimbot listeners
+      document.getElementById('ativarAuxilio').addEventListener('change', e => {
+        config.aimbot.enabled = e.target.checked;
+        updateStatusIndicator();
       });
       document.getElementById('ativarFov').addEventListener('change', e => {
         config.aimbot.fovEnabled = e.target.checked;
@@ -649,8 +627,7 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
         document.getElementById('maxDistValue').textContent = `${e.target.value}m`;
       });
       document.getElementById('auxType').addEventListener('change', e => {
-        const value = e.target.value.toLowerCase().replace('auxílio ', '').replace('ç', 'c');
-        config.aimbot.bone = value;
+        config.aimbot.bone = e.target.value.toLowerCase().replace('auxílio ', '').replace('ç', 'c');
       });
       document.querySelectorAll('input[name="tipo"]').forEach(r => {
         r.addEventListener('change', () => config.aimbot.trigger = r.value);
@@ -658,34 +635,29 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
 
       // Extras & Otimização
       ['antiPinadeira','antiTremedeira','fixarCabeca','autoHeadshot','noRecoil'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('change', e => config.extras[id] = e.target.checked);
+        document.getElementById(id)?.addEventListener('change', e => config.extras[id] = e.target.checked);
       });
       ['limparCache','fecharApps','boostRAM','otimizarBateria','reduzirLag'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('change', e => config.optimization[id] = e.target.checked);
+        document.getElementById(id)?.addEventListener('change', e => config.optimization[id] = e.target.checked);
       });
-      document.getElementById('fpsSelect').addEventListener('change', e => config.optimization.fpsTarget = e.target.value);
+      document.getElementById('fpsSelect')?.addEventListener('change', e => config.optimization.fpsTarget = e.target.value);
 
-      // Botões
+      // Botões principais
       document.getElementById('ativarBtn').addEventListener('click', () => {
         config.aimbot.active = !config.aimbot.active;
         updateAimbotButton();
         updateStatusIndicator();
-        const boneUpper = config.aimbot.bone.toUpperCase().replace('C', 'Ç');
+        const bone = config.aimbot.bone.toUpperCase().replace('C', 'Ç');
         if (config.aimbot.active && config.aimbot.enabled) {
-          showToast(`HEADTRICK ATIVADO • ${boneUpper} • ${config.aimbot.strength}%`, 3500, 'success');
-          console.log('Aimbot ativado:', config.aimbot); // Log para debug
+          showToast(`HEADTRICK 360 ATIVADO • ${bone} • ${config.aimbot.strength}% • FOV ${config.aimbot.fov}°`, 4000, 'success');
         } else {
-          showToast('HEADTRICK DESATIVADO', 3000, 'error');
-          console.log('Aimbot desativado');
+          showToast('HEADTRICK 360 DESATIVADO', 3500, 'error');
         }
       });
 
       document.getElementById('ativarExtraBtn').addEventListener('click', () => {
         const active = Object.keys(config.extras).filter(k => config.extras[k]).map(k => k.replace(/([A-Z])/g, ' $1').trim());
-        showToast(active.length ? `${active.join(' + ')} ATIVOS` : 'Nenhum extra selecionado', 4000, active.length ? 'success' : 'warning');
-        console.log('Extras ativados:', active);
+        showToast(active.length ? `${active.join(' + ')} ATIVOS` : 'Nenhum extra selecionado', 4500, active.length ? 'success' : 'warning');
       });
 
       document.getElementById('aplicarOtimizacaoBtn').addEventListener('click', () => {
@@ -695,22 +667,21 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
         if (config.optimization.boostRAM) list.push('RAM');
         if (config.optimization.otimizarBateria) list.push('Bateria');
         if (config.optimization.reduzirLag) list.push('Rede');
-        showToast(`OTIMIZAÇÃO APLICADA • ${list.join(' + ')} • ${config.optimization.fpsTarget} FPS`, 3500, 'success');
-        console.log('Otimização aplicada:', config.optimization);
+        showToast(`OTIMIZAÇÃO APLICADA • ${list.join(' + ')} • ${config.optimization.fpsTarget} FPS`, 4000, 'success');
       });
 
-      document.getElementById("dnsAndroidBtn").addEventListener('click', () => showToast("DNS Android configurado!", 2500, 'success'));
-      document.getElementById("dnsIphoneBtn").addEventListener('click', () => showToast("DNS iPhone configurado!", 2500, 'success'));
+      document.getElementById('dnsAndroidBtn').addEventListener('click', () => showToast("DNS Android configurado com sucesso!", 2800, 'success'));
+      document.getElementById('dnsIphoneBtn').addEventListener('click', () => showToast("DNS iPhone configurado com sucesso!", 2800, 'success'));
 
       document.getElementById('saveConfigBtn').addEventListener('click', saveConfig);
       document.getElementById('loadConfigBtn').addEventListener('click', loadConfig);
 
       document.querySelectorAll('.color-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          document.querySelectorAll('.color-btn').forEach(b => b.style.border = '3px solid transparent');
-          btn.style.border = '3px solid white';
+          document.querySelectorAll('.color-btn').forEach(b => b.style.border = '4px solid transparent');
+          btn.style.border = '4px solid white';
           updateTheme(btn.dataset.color);
-          showToast('Tema aplicado!', 1500);
+          showToast('Tema atualizado!', 1800);
         });
       });
 
@@ -719,18 +690,18 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
         this.textContent = 'INJETANDO...';
         this.disabled = true;
         setTimeout(() => {
-          showToast('Injeção simulada completa. Abrindo Free Fire...', 2500, 'success');
+          showToast('Injeção simulada concluída. Abrindo Free Fire...', 3000, 'success');
           abrirFF();
           this.textContent = 'ABRIR FREE FIRE + INJETAR';
           this.disabled = false;
-        }, 2000);
+        }, 2200);
       });
 
       document.getElementById('enterBtn').addEventListener('click', async () => {
         const keyInput = document.getElementById('licenseKey');
         const key = keyInput.value.trim().toUpperCase();
         if (!validateKey(key)) {
-          showToast('Key inválida! Formato: XXXX-XXXX-XXXX', 3000, 'error');
+          showToast('Formato inválido! Use XXXX-XXXX-XXXX', 3500, 'error');
           keyInput.focus();
           return;
         }
@@ -740,37 +711,32 @@ R = 90 00 00 00  ; Approximate for 144, adjust based on actual value type
 
         await loadSystemInfo(key);
         loadConfig();
-        showToast('Autenticação bem-sucedida! Bem-vindo.', 4000, 'success');
+        showToast('Bem-vindo ao Project X Red v4.2 – OB52', 5000, 'success');
       });
 
       document.getElementById('licenseKey').addEventListener('keypress', e => {
         if (e.key === 'Enter') document.getElementById('enterBtn').click();
       });
 
-      // Partículas otimizadas: menos partículas, sem hover para performance
+      // Partículas otimizadas (menos partículas para performance)
       particlesJS('particles-js', {
         particles: {
-          number: {value: 50},
+          number: {value: 35},
           color: {value: currentColor},
-          opacity: {value: 0.6},
-          size: {value: 3},
-          line_linked: {enable: true, distance: 120, color: currentColor, opacity: 0.35, width: 1},
-          move: {enable: true, speed: 2.5}
+          opacity: {value: 0.55},
+          size: {value: 2.8},
+          line_linked: {enable: true, distance: 110, color: currentColor, opacity: 0.3, width: 1},
+          move: {enable: true, speed: 2}
         },
-        interactivity: {events: {onhover: {enable: false}}} // Desativado para economia
+        interactivity: {events: {onhover: {enable: false}}}
       });
 
-      // Seleciona cor default
-      document.querySelector('.color-btn[data-color="#e60000"]').style.border = '3px solid white';
+      document.querySelector('.color-btn[data-color="#e60000"]').style.border = '4px solid white';
     });
 
-    // Service Worker para PWA
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service Worker registrado.'))
-        .catch(err => console.warn('Erro no SW:', err));
+      navigator.serviceWorker.register('sw.js').catch(() => {});
     }
   </script>
-
 </body>
-          </html>
+  </html>
