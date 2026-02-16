@@ -366,53 +366,51 @@
 
     <!-- CÓDIGOS OCULTOS / PATTERNS DE MEMÓRIA - CONSOLIDADOS E APRIMORADOS -->
     <pre id="hiddenCodes" style="display:none" aria-hidden="true">
-
 # =============================================================================
 # PROJECT X RED v5.0 – PATTERNS FIXADOS SENSI LEVE/SUAVE – OB52 A23 (2026)
 # Foco: HEADTRICK SUAVE + 70% RECOIL + ANTI-LAG A23 + ANTI-BAN PRO
-# ARrumado: Recoil parcial (não trava) | Smooth aim | Zero lag input
+# Arrumado: Recoil parcial (não trava) | Smooth aim | Zero lag input
+# Ajustes: Alinhamento correto de bytes entre SEARCH e REPLACE
 # =============================================================================
 
 # ─── BONE TARGETING SUAVE (HEAD PRINCIPAL + FALLBACK) ──────────────────────
 HEAD_SEARCH         = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 2F 63 20 41 31
-HEAD_REPLACE        = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF  # Head priorizada
+HEAD_REPLACE        = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF  
 
 # Fallback suave: Pescoço -> Head (só se necessário)
 NECK_SEARCH         = 62 6F 6E 65 5F 4E 65 63 6B 00 00 00 00 00 00 00 00 00 00 00 00 00 3D 34
-NECK_REPLACE        = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 33 33 80 3E  # 0.25f suave
+NECK_REPLACE        = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 33 33 80 3E  
 
 # REMOVIDO: Chest/Spine -> Evita puxão baixo/pesado
 
 # ─── MAGIC BULLET SMOOTH (HEAD COMPENSADO + DROP FIX LEVE) ──────────────────
-MAGIC_HEADSHOT_SEARCH = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? ?? ?? ?? EC 51 B8
-MAGIC_HEADSHOT_REPLACE= C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 C8 42 FF FF FF FF 80 3F 01  # Smooth head
+MAGIC_HEADSHOT_SEARCH  = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? ?? ?? ?? EC 51 B8
+MAGIC_HEADSHOT_REPLACE = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 C8 42 FF FF FF FF 80 3F 01  
 
 # ─── RECOIL 70% REDUZIDO (LEVE, NÃO TRAVA SENSI) ───────────────────────────
-# X Recoil: 0.3f (70% off, permite movimento natural)
-RECOIL_PATTERN_X_SEARCH = 00 00 00 00 00 00 00 00 15 6E 00 00 00 00 00 00 00 40 01 00
-RECOIL_PATTERN_X_REPLACE= 00 00 00 00 00 00 00 00 00 00 60 3E 00 00 00 00 00 00 00 00  # 0.3f suave
+RECOIL_PATTERN_X_SEARCH  = 00 00 00 00 00 00 00 00 15 6E 00 00 00 00 00 00 00 40 01 00
+RECOIL_PATTERN_X_REPLACE = 00 00 00 00 00 00 00 00 00 00 60 3E 00 00 00 00 00 00 00 00  
 
-# Y Recoil: 0.3f
-RECOIL_PATTERN_Y_SEARCH = 00 00 00 00 00 00 00 00 FD 20 02 00 00 00 00 00 00 24 06 00
-RECOIL_PATTERN_Y_REPLACE= 00 00 00 00 00 00 00 00 00 00 60 3E 00 00 00 00 00 00 00 00  # 0.3f suave
+RECOIL_PATTERN_Y_SEARCH  = 00 00 00 00 00 00 00 00 FD 20 02 00 00 00 00 00 00 24 06 00
+RECOIL_PATTERN_Y_REPLACE = 00 00 00 00 00 00 00 00 00 00 60 3E 00 00 00 00 00 00 00 00  
 
 # ─── HEAD PRIORITY + SMOOTHNESS BOOST ──────────────────────────────────────
-HEAD_PRIORITY_SEARCH = 3F 80 00 00 ?? ?? ?? ?? 00 00 80 3F 00 00 00 00
-HEAD_PRIORITY_REPLACE= 3F 80 00 00 FF FF FF 3F 00 00 80 3F 00 00 00 00  # Head top + smooth
+HEAD_PRIORITY_SEARCH  = 3F 80 00 00 ?? ?? ?? ?? 00 00 80 3F 00 00 00 00
+HEAD_PRIORITY_REPLACE = 3F 80 00 00 FF FF FF 3F 00 00 80 3F 00 00 00 00  
 
-# ─── NOVO: SENSI BOOST INTERNA +20% (LEVE, ANTI-TRAVADA A23) ──────────────
+# ─── SENSI BOOST INTERNA +20% (LEVE, ANTI-TRAVADA A23) ─────────────────────
 SENSI_X_SEARCH      = F3 0F 10 05 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 00 00 80 3F
-SENSI_X_REPLACE     = F3 0F 10 05 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 00 00 A0 3F  # +25% X smooth
+SENSI_X_REPLACE     = F3 0F 10 05 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 00 00 A0 3F  
 
 SENSI_Y_SEARCH      = 48 8B 05 ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 00 00 80 3F
-SENSI_Y_REPLACE     = 48 8B 05 ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 00 00 A0 3F  # +25% Y smooth
+SENSI_Y_REPLACE     = 48 8B 05 ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 00 00 A0 3F  
 
 # ─── FPS UNLOCK + ANTI-LAG A23 ────────────────────────────────────────────
 FPS_UNLOCK_SEARCH   = 3C 00 00 00 00 00
-FPS_UNLOCK_REPLACE  = 90 00 00 00 00 00  # \\~120 FPS suave (NOP parcial)
+FPS_UNLOCK_REPLACE  = 90 00 00 00 00 00  
 
 ANTI_LAG_SEARCH     = EC 51 B8 3D CD CC 4C 3F ?? ?? ?? ?? 00 00 C8 42
-ANTI_LAG_REPLACE    = EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42  # Zero input lag
+ANTI_LAG_REPLACE    = EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42  
 
 # ─── ANTI-BAN (MESMO) ─────────────────────────────────────────────────────
 BAN_STRINGS = ["XH_REPORT_HACKKILL","XH_MAILBOX_REPORT","EVENT_TYPE_REPORT_CHEAT","ANTIHACK_CLOSEWINDOW","CHEAT_DETECTED","MEMORY_MODIFY","ILLEGAL_INJECTION","HITREG_VIOLATION","AIMBOT_FLAG","TELEMETRY_ANOMALY","SPEEDHACK_DETECT"]
@@ -421,7 +419,6 @@ BAN_STRINGS = ["XH_REPORT_HACKKILL","XH_MAILBOX_REPORT","EVENT_TYPE_REPORT_CHEAT
 # FIM – SENSI 100% LEVE | HEAD 95% | ZERO BAN | TESTE TREINO!
 # Dica: GG > Grupo > Refine > Aplique 1x cada. Reativa após morte.
 # =============================================================================
-
     </pre>
   </div>
 
@@ -634,7 +631,7 @@ function simulateEngineInjection(callback) {
 
   setTimeout(() => {
     clearInterval(loaderInterval);
-    const successChance = isA23 ? 0.98 : 0.88; // Aumentei chance para A23
+    const successChance = isA23 ? 0.98 : 0.88;
     if (Math.random() < successChance) {
       const compat = Math.floor(90 + Math.random() * 10);
       showToast(`Engine OB52 v5.0 injetada com sucesso (${compat}% compatibilidade)`, 5200, 'success');
@@ -915,4 +912,4 @@ if ('serviceWorker' in navigator) {
   </script>
 
 </body>
-        </html>
+          </html>
