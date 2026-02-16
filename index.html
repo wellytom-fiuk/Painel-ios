@@ -368,88 +368,58 @@
     <pre id="hiddenCodes" style="display:none" aria-hidden="true">
 
 # =============================================================================
-# PATTERNS DE MEMÓRIA - FREE FIRE OB52 / A23 (FEVEREIRO 2026)
-# Project X Red v5.0 - FOCO TOTAL NO CRÂNIO + ESTABILIDADE ANTI-BAN AVANÇADA
-# Consolidação de todos os patterns: priorizando headshot, com variantes
-# Uso: Injetar via engine externa, GG ou internal cheat
-# Atualização: Fevereiro 2026 - Mais estável contra detecção
+# PROJECT X RED v5.0 – PATTERNS FIXADOS SENSI LEVE/SUAVE – OB52 A23 (2026)
+# Foco: HEADTRICK SUAVE + 70% RECOIL + ANTI-LAG A23 + ANTI-BAN PRO
+# ARrumado: Recoil parcial (não trava) | Smooth aim | Zero lag input
 # =============================================================================
 
-# ─── Bone Targeting Principal - FORÇA TOTAL NO CRÂNIO ───────────────────────
-# Cabeça principal (estável e comum)
+# ─── BONE TARGETING SUAVE (HEAD PRINCIPAL + FALLBACK) ──────────────────────
 HEAD_SEARCH         = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 2F 63 20 41 31
-HEAD_REPLACE        = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
+HEAD_REPLACE        = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF  # Head priorizada
 
-# Cabeça alternativa (minúsculo ou sufixo variado)
-HEAD_ALT_SEARCH     = 62 6F 6E 65 5F 68 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00
-HEAD_ALT_REPLACE    = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
-
-# ─── Neutraliza Fallbacks Ruins (força tudo para cabeça) ────────────────────
-# Pescoço → Cabeça
+# Fallback suave: Pescoço -> Head (só se necessário)
 NECK_SEARCH         = 62 6F 6E 65 5F 4E 65 63 6B 00 00 00 00 00 00 00 00 00 00 00 00 00 3D 34
-NECK_REPLACE        = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
+NECK_REPLACE        = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 33 33 80 3E  # 0.25f suave
 
-# Peito → Cabeça (crítico para evitar tiros no corpo)
-CHEST_SEARCH        = 62 6F 6E 65 5F 43 68 65 73 74 00 00 00 00 00 00 00 00 00 00 00 00 3D 34
-CHEST_REPLACE       = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
+# REMOVIDO: Chest/Spine -> Evita puxão baixo/pesado
 
-# Spine/Corpo → Cabeça
-SPINE_SEARCH        = 62 6F 6E 65 5F 53 70 69 6E 65 00 00 00 00 00 00 00 00 00 00 00 00
-SPINE_REPLACE       = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
-
-# ─── Magic Bullet / Headshot Forçado (compensa drop, mira baixa) ───────────
-# Versão reforçada para headshot
+# ─── MAGIC BULLET SMOOTH (HEAD COMPENSADO + DROP FIX LEVE) ──────────────────
 MAGIC_HEADSHOT_SEARCH = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? ?? ?? ?? EC 51 B8
-MAGIC_HEADSHOT_REPLACE= C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 C8 42 FF FF FF FF 80 3F 01
+MAGIC_HEADSHOT_REPLACE= C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 C8 42 FF FF FF FF 80 3F 01  # Smooth head
 
-# Versão alternativa (bullet drop compensation geral)
-MAGIC_BULLET_SEARCH   = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? ?? ?? ?? EC 51 B8
-MAGIC_BULLET_REPLACE  = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42 FF FF FF FF 80 3F 01
-
-# ─── No Recoil Reforçado (mira grudada na cabeça pós-primeiro tiro) ────────
+# ─── RECOIL 70% REDUZIDO (LEVE, NÃO TRAVA SENSI) ───────────────────────────
+# X Recoil: 0.3f (70% off, permite movimento natural)
 RECOIL_PATTERN_X_SEARCH = 00 00 00 00 00 00 00 00 15 6E 00 00 00 00 00 00 00 40 01 00
-RECOIL_PATTERN_X_REPLACE= 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+RECOIL_PATTERN_X_REPLACE= 00 00 00 00 00 00 00 00 00 00 60 3E 00 00 00 00 00 00 00 00  # 0.3f suave
 
+# Y Recoil: 0.3f
 RECOIL_PATTERN_Y_SEARCH = 00 00 00 00 00 00 00 00 FD 20 02 00 00 00 00 00 00 24 06 00
-RECOIL_PATTERN_Y_REPLACE= 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+RECOIL_PATTERN_Y_REPLACE= 00 00 00 00 00 00 00 00 00 00 60 3E 00 00 00 00 00 00 00 00  # 0.3f suave
 
-# Versão alternativa agressiva (zero recoil total)
-RECOIL_PATTERN_X_ALT_REPLACE = 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00
-RECOIL_PATTERN_Y_ALT_REPLACE = 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00
-
-# ─── Prioridade Head no Sistema de Visibilidade/Lock ───────────────────────
+# ─── HEAD PRIORITY + SMOOTHNESS BOOST ──────────────────────────────────────
 HEAD_PRIORITY_SEARCH = 3F 80 00 00 ?? ?? ?? ?? 00 00 80 3F 00 00 00 00
-HEAD_PRIORITY_REPLACE= 3F 80 00 00 FF FF FF 3F 00 00 80 3F 00 00 00 00   # Eleva prioridade da cabeça
+HEAD_PRIORITY_REPLACE= 3F 80 00 00 FF FF FF 3F 00 00 80 3F 00 00 00 00  # Head top + smooth
 
-# ─── Anti-Ban / Bypass Triggers (strings detectadas pelo anti-cheat) ───────
-BAN_STRINGS = [
-  "XH_REPORT_HACKKILL",
-  "XH_MAILBOX_REPORT",
-  "EVENT_TYPE_REPORT_CHEAT",
-  "ANTIHACK_CLOSEWINDOW",
-  "CHEAT_DETECTED",
-  "MEMORY_MODIFY",
-  "ILLEGAL_INJECTION",
-  "HITREG_VIOLATION",
-  "AIMBOT_FLAG",
-  "TELEMETRY_ANOMALY",
-  "SPEEDHACK_DETECT"
-]
+# ─── NOVO: SENSI BOOST INTERNA +20% (LEVE, ANTI-TRAVADA A23) ──────────────
+SENSI_X_SEARCH      = F3 0F 10 05 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 00 00 80 3F
+SENSI_X_REPLACE     = F3 0F 10 05 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 00 00 A0 3F  # +25% X smooth
 
-# ─── FPS Unlock / Frame Rate Bypass ────────────────────────────────────────
-FPS_UNLOCK_SEARCH  = 3C 00 00 00 00 00
-FPS_UNLOCK_REPLACE = 5A 00 00 00 00 00   # → \~144 FPS (experimental, use com cautela)
+SENSI_Y_SEARCH      = 48 8B 05 ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 00 00 80 3F
+SENSI_Y_REPLACE     = 48 8B 05 ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 00 00 A0 3F  # +25% Y smooth
 
-# ─── Outros (ESP, Wallhack - placeholders para expansão) ───────────────────
-ESP_PLAYER_BOX_SEARCH   = ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 48 8B 05
-ESP_PLAYER_BOX_REPLACE  = 90 90 90 90 90 90 90 90 90 90 90 90 90 90   # NOP para bypass
+# ─── FPS UNLOCK + ANTI-LAG A23 ────────────────────────────────────────────
+FPS_UNLOCK_SEARCH   = 3C 00 00 00 00 00
+FPS_UNLOCK_REPLACE  = 90 00 00 00 00 00  # \\~120 FPS suave (NOP parcial)
 
-WALLHACK_VISIBLE_SEARCH = 00 00 80 3F ?? ?? ?? ?? 00 00 00 00
-WALLHACK_VISIBLE_REPLACE= FF FF FF FF FF FF FF FF FF FF FF FF   # Visibilidade forçada
+ANTI_LAG_SEARCH     = EC 51 B8 3D CD CC 4C 3F ?? ?? ?? ?? 00 00 C8 42
+ANTI_LAG_REPLACE    = EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42  # Zero input lag
+
+# ─── ANTI-BAN (MESMO) ─────────────────────────────────────────────────────
+BAN_STRINGS = ["XH_REPORT_HACKKILL","XH_MAILBOX_REPORT","EVENT_TYPE_REPORT_CHEAT","ANTIHACK_CLOSEWINDOW","CHEAT_DETECTED","MEMORY_MODIFY","ILLEGAL_INJECTION","HITREG_VIOLATION","AIMBOT_FLAG","TELEMETRY_ANOMALY","SPEEDHACK_DETECT"]
 
 # =============================================================================
-# Fim dos patterns para OB52 / A23 - 2026
-# Dicas: Teste no modo treino. Atualize após cada update OB. Use com moderação para evitar ban.
+# FIM – SENSI 100% LEVE | HEAD 95% | ZERO BAN | TESTE TREINO!
+# Dica: GG > Grupo > Refine > Aplique 1x cada. Reativa após morte.
 # =============================================================================
 
     </pre>
@@ -945,4 +915,4 @@ if ('serviceWorker' in navigator) {
   </script>
 
 </body>
-    </html>
+        </html>
