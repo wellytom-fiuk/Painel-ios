@@ -54,6 +54,7 @@
       border: 1px solid rgba(255, 77, 77, 0.3);
       box-shadow: 0 0 40px var(--primary-glow);
       overflow: hidden;
+      transition: all 0.3s ease;
     }
 
     .login-box, .panel { padding: 32px 24px; text-align: center; }
@@ -66,7 +67,9 @@
       box-shadow: 0 0 40px var(--primary-glow);
       object-fit: cover;
       margin-bottom: 24px;
+      transition: transform 0.3s ease;
     }
+    .avatar:hover { transform: scale(1.05); }
 
     h1 { font-size: 2rem; color: var(--primary); margin-bottom: 12px; text-shadow: 0 0 20px var(--primary-glow); }
     h2 { font-size: 1.5rem; color: var(--accent); margin-bottom: 20px; }
@@ -81,6 +84,7 @@
       color: var(--text);
       font-size: 1.1rem;
       text-align: center;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
     .form-input:focus { border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); outline: none; }
 
@@ -137,7 +141,9 @@
       margin: 16px 0;
       font-size: 1rem;
       cursor: pointer;
+      transition: color 0.3s;
     }
+    label:hover { color: var(--accent); }
     input[type="checkbox"], input[type="radio"] {
       accent-color: var(--primary);
       margin-right: 14px;
@@ -153,7 +159,10 @@
       background: rgba(20, 20, 20, 0.8);
       color: var(--text);
       font-size: 1rem;
+      transition: border-color 0.3s;
     }
+    select:focus, input[type="range"]:focus { border-color: var(--primary); }
+
     input[type="range"] {
       height: 10px;
       -webkit-appearance: none;
@@ -204,12 +213,14 @@
       border-radius: 50%;
       background: var(--error);
       margin-left: 8px;
+      transition: background 0.3s;
     }
     .status-indicator.active { background: var(--success); }
 
     @media (max-width: 480px) {
       .container { width: 95%; padding: 24px 18px; }
       .btn, .btn-link { font-size: 0.95rem; padding: 14px; }
+      .tabs { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -336,6 +347,7 @@
       <div class="divider"></div>
       <button class="btn" id="saveConfigBtn">SALVAR CONFIGURAÇÕES</button>
       <button class="btn" id="loadConfigBtn" style="background: linear-gradient(135deg, #333, #555);">CARREGAR CONFIGURAÇÕES</button>
+      <button class="btn" id="resetConfigBtn" style="background: linear-gradient(135deg, #f44336, #d32f2f);">RESETAR CONFIGURAÇÕES</button>
     </div>
 
     <div id="info" class="content">
@@ -351,82 +363,109 @@
         Teste no treino antes de ranqueada. Use com inteligência.
       </p>
     </div>
+
+    <!-- CÓDIGOS OCULTOS / PATTERNS DE MEMÓRIA - CONSOLIDADOS E APRIMORADOS -->
+    <pre id="hiddenCodes" style="display:none" aria-hidden="true">
+
+# =============================================================================
+# PATTERNS DE MEMÓRIA - FREE FIRE OB52 / A23 (FEVEREIRO 2026)
+# Project X Red v5.0 - FOCO TOTAL NO CRÂNIO + ESTABILIDADE ANTI-BAN AVANÇADA
+# Consolidação de todos os patterns: priorizando headshot, com variantes
+# Uso: Injetar via engine externa, GG ou internal cheat
+# Atualização: Fevereiro 2026 - Mais estável contra detecção
+# =============================================================================
+
+# ─── Bone Targeting Principal - FORÇA TOTAL NO CRÂNIO ───────────────────────
+# Cabeça principal (estável e comum)
+HEAD_SEARCH         = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 2F 63 20 41 31
+HEAD_REPLACE        = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
+
+# Cabeça alternativa (minúsculo ou sufixo variado)
+HEAD_ALT_SEARCH     = 62 6F 6E 65 5F 68 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00
+HEAD_ALT_REPLACE    = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
+
+# ─── Neutraliza Fallbacks Ruins (força tudo para cabeça) ────────────────────
+# Pescoço → Cabeça
+NECK_SEARCH         = 62 6F 6E 65 5F 4E 65 63 6B 00 00 00 00 00 00 00 00 00 00 00 00 00 3D 34
+NECK_REPLACE        = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
+
+# Peito → Cabeça (crítico para evitar tiros no corpo)
+CHEST_SEARCH        = 62 6F 6E 65 5F 43 68 65 73 74 00 00 00 00 00 00 00 00 00 00 00 00 3D 34
+CHEST_REPLACE       = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
+
+# Spine/Corpo → Cabeça
+SPINE_SEARCH        = 62 6F 6E 65 5F 53 70 69 6E 65 00 00 00 00 00 00 00 00 00 00 00 00
+SPINE_REPLACE       = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
+
+# ─── Magic Bullet / Headshot Forçado (compensa drop, mira baixa) ───────────
+# Versão reforçada para headshot
+MAGIC_HEADSHOT_SEARCH = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? ?? ?? ?? EC 51 B8
+MAGIC_HEADSHOT_REPLACE= C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 C8 42 FF FF FF FF 80 3F 01
+
+# Versão alternativa (bullet drop compensation geral)
+MAGIC_BULLET_SEARCH   = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? ?? ?? ?? EC 51 B8
+MAGIC_BULLET_REPLACE  = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42 FF FF FF FF 80 3F 01
+
+# ─── No Recoil Reforçado (mira grudada na cabeça pós-primeiro tiro) ────────
+RECOIL_PATTERN_X_SEARCH = 00 00 00 00 00 00 00 00 15 6E 00 00 00 00 00 00 00 40 01 00
+RECOIL_PATTERN_X_REPLACE= 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+RECOIL_PATTERN_Y_SEARCH = 00 00 00 00 00 00 00 00 FD 20 02 00 00 00 00 00 00 24 06 00
+RECOIL_PATTERN_Y_REPLACE= 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+# Versão alternativa agressiva (zero recoil total)
+RECOIL_PATTERN_X_ALT_REPLACE = 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00
+RECOIL_PATTERN_Y_ALT_REPLACE = 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00
+
+# ─── Prioridade Head no Sistema de Visibilidade/Lock ───────────────────────
+HEAD_PRIORITY_SEARCH = 3F 80 00 00 ?? ?? ?? ?? 00 00 80 3F 00 00 00 00
+HEAD_PRIORITY_REPLACE= 3F 80 00 00 FF FF FF 3F 00 00 80 3F 00 00 00 00   # Eleva prioridade da cabeça
+
+# ─── Anti-Ban / Bypass Triggers (strings detectadas pelo anti-cheat) ───────
+BAN_STRINGS = [
+  "XH_REPORT_HACKKILL",
+  "XH_MAILBOX_REPORT",
+  "EVENT_TYPE_REPORT_CHEAT",
+  "ANTIHACK_CLOSEWINDOW",
+  "CHEAT_DETECTED",
+  "MEMORY_MODIFY",
+  "ILLEGAL_INJECTION",
+  "HITREG_VIOLATION",
+  "AIMBOT_FLAG",
+  "TELEMETRY_ANOMALY",
+  "SPEEDHACK_DETECT"
+]
+
+# ─── FPS Unlock / Frame Rate Bypass ────────────────────────────────────────
+FPS_UNLOCK_SEARCH  = 3C 00 00 00 00 00
+FPS_UNLOCK_REPLACE = 5A 00 00 00 00 00   # → \~144 FPS (experimental, use com cautela)
+
+# ─── Outros (ESP, Wallhack - placeholders para expansão) ───────────────────
+ESP_PLAYER_BOX_SEARCH   = ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 48 8B 05
+ESP_PLAYER_BOX_REPLACE  = 90 90 90 90 90 90 90 90 90 90 90 90 90 90   # NOP para bypass
+
+WALLHACK_VISIBLE_SEARCH = 00 00 80 3F ?? ?? ?? ?? 00 00 00 00
+WALLHACK_VISIBLE_REPLACE= FF FF FF FF FF FF FF FF FF FF FF FF   # Visibilidade forçada
+
+# =============================================================================
+# Fim dos patterns para OB52 / A23 - 2026
+# Dicas: Teste no modo treino. Atualize após cada update OB. Use com moderação para evitar ban.
+# =============================================================================
+
+    </pre>
   </div>
 
   <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
-
-  <!-- CÓDIGOS OCULTOS / PATTERNS DE MEMÓRIA - PROJECT X RED v5.0 -->
-  <pre id="hiddenCodes" style="display:none" aria-hidden="true">
-
-    # =====================================================================
-    # PATTERNS DE MEMÓRIA - FREE FIRE OB52 / A23 (2026)
-    # Formato: SEARCH → REPLACE
-    # Uso: injetados via engine externa / GG / internal cheat
-    # =====================================================================
-
-    # ─── Aimbot / Bone Targeting ────────────────────────────────────────
-    # Cabeça (Head) - mais comum e estável
-    HEAD_SEARCH    = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 2F 63 20 41 31
-    HEAD_REPLACE   = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
-
-    # Pescoço (Neck) - fallback quando head é protegido
-    NECK_SEARCH    = 62 6F 6E 65 5F 4E 65 63 6B 00 00 00 00 00 00 00 00 00 00 00 00 00 3D 34
-    NECK_REPLACE   = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF
-
-    # Peito / Corpo (Chest fallback)
-    CHEST_SEARCH   = 62 6F 6E 65 5F 43 68 65 73 74 00 00 00 00 00 00 00 00 00 00 00 00 3D 34
-    CHEST_REPLACE  = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF
-
-    # ─── Magic Bullet / Bullet Drop Compensation ────────────────────────
-    MAGIC_BULLET_SEARCH = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? ?? ?? ?? EC 51 B8
-    MAGIC_BULLET_REPLACE= C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42 FF FF FF FF 80 3F 01
-
-    # ─── No Recoil / Recoil Pattern Zero ─────────────────────────────────
-    RECOIL_PATTERN_X_SEARCH = 00 00 00 00 00 00 00 00 15 6E 00 00 00 00 00 00 00 40 01 00
-    RECOIL_PATTERN_X_REPLACE= 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00
-
-    RECOIL_PATTERN_Y_SEARCH = 00 00 00 00 00 00 00 00 FD 20 02 00 00 00 00 00 00 24 06 00
-    RECOIL_PATTERN_Y_REPLACE= 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00
-
-    # ─── Anti-Ban / Bypass Triggers (strings detectadas pelo anti-cheat) ──
-    BAN_STRINGS = [
-      "XH_REPORT_HACKKILL",
-      "XH_MAILBOX_REPORT",
-      "EVENT_TYPE_REPORT_CHEAT",
-      "ANTIHACK_CLOSEWINDOW",
-      "CHEAT_DETECTED",
-      "MEMORY_MODIFY",
-      "ILLEGAL_INJECTION",
-      "HITREG_VIOLATION",
-      "AIMBOT_FLAG",
-      "TELEMETRY_ANOMALY",
-      "SPEEDHACK_DETECT"
-    ]
-
-    # ─── FPS Unlock / Frame Rate Bypass ──────────────────────────────────
-    FPS_UNLOCK_SEARCH  = 3C 00 00 00 00 00
-    FPS_UNLOCK_REPLACE = 5A 00 00 00 00 00   # → \~144 FPS (experimental)
-
-    # ─── Outros (ESP, Wallhack, etc - placeholders) ──────────────────────
-    ESP_PLAYER_BOX_SEARCH   = ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 48 8B 05
-    ESP_PLAYER_BOX_REPLACE  = 90 90 90 90 90 90 90 90 90 90 90 90 90 90
-
-    WALLHACK_VISIBLE_SEARCH = 00 00 80 3F ?? ?? ?? ?? 00 00 00 00
-    WALLHACK_VISIBLE_REPLACE= FF FF FF FF FF FF FF FF FF FF FF FF
-
-    # Fim dos patterns conhecidos para OB52 / A23 - 2026
-    # Atualizar sempre que houver OB update significativo
-  </pre>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   <script>
 // =============================================
 // PROJECT X RED v5.0 – Engine OB52 2026 – A23 Optimized
-// Refatorado: modular, legível, robusto e com melhor UX
+// Refatorado: Mais modular, eficiente e com melhor UX (Henrico - 2026)
 // =============================================
 
 const ENGINE_VERSION = "OB52-2026-A23-SUPER-OPT-V5.0";
-let currentThemeColor = "#e60000";
+let currentThemeColor = localStorage.getItem('px_theme_color') || "#e60000";
 
 const defaultConfig = {
   aimbot: {
@@ -456,13 +495,14 @@ const defaultConfig = {
     fpsTarget: "90"
   },
   engineVersion: ENGINE_VERSION,
-  isA23: false
+  isA23: false,
+  themeColor: currentThemeColor
 };
 
 let config = { ...defaultConfig };
 
 // ────────────────────────────────────────────────
-//  UTILITÁRIOS
+//  UTILITÁRIOS APRIMORADOS
 // ────────────────────────────────────────────────
 
 function isA23Device() {
@@ -496,6 +536,7 @@ function showToast(msg, duration = 2800, type = 'info') {
 
 function applyThemeColor(hex) {
   currentThemeColor = hex;
+  localStorage.setItem('px_theme_color', hex);
   const r = parseInt(hex.slice(1,3), 16);
   const g = parseInt(hex.slice(3,5), 16);
   const b = parseInt(hex.slice(5,7), 16);
@@ -517,13 +558,14 @@ function isValidLicenseKey(key) {
 }
 
 // ────────────────────────────────────────────────
-//  CONFIG – LOCALSTORAGE
+//  CONFIG – LOCALSTORAGE APRIMORADA
 // ────────────────────────────────────────────────
 
 function saveUserConfig() {
   try {
     config.isA23 = isA23Device();
     config.engineVersion = ENGINE_VERSION;
+    config.themeColor = currentThemeColor;
     localStorage.setItem('projectx_red_v50_ob52_a23', JSON.stringify(config));
     showToast("Configurações salvas com sucesso", 2200, 'success');
   } catch (err) {
@@ -537,12 +579,24 @@ function loadUserConfig(silent = false) {
     const saved = localStorage.getItem('projectx_red_v50_ob52_a23');
     if (saved) {
       Object.assign(config, JSON.parse(saved));
+      applyThemeColor(config.themeColor || "#e60000");
       updateUIFromConfig();
       if (!silent) showToast("Configurações restauradas", 2200, 'success');
+    } else {
+      showToast("Nenhuma config salva encontrada. Usando defaults.", 3200, 'warning');
     }
   } catch (err) {
     console.error("Erro ao carregar config:", err);
+    showToast("Erro ao carregar config. Usando defaults.", 3200, 'error');
   }
+}
+
+function resetUserConfig() {
+  localStorage.removeItem('projectx_red_v50_ob52_a23');
+  config = { ...defaultConfig };
+  applyThemeColor("#e60000");
+  updateUIFromConfig();
+  showToast("Configurações resetadas para default", 2200, 'warning');
 }
 
 function updateUIFromConfig() {
@@ -553,13 +607,13 @@ function updateUIFromConfig() {
   document.getElementById('fovRange').value = config.aimbot.fov;
   document.getElementById('fovValue').textContent = config.aimbot.fov + '°';
 
-  const boneOptions = {
+  const boneMap = {
     cabeca: 'Auxílio Cabeça',
     pescoco: 'Auxílio Pescoço',
     peito: 'Auxílio Peito',
     recoil: 'Auxílio Recoil'
   };
-  document.getElementById('auxType').value = boneOptions[config.aimbot.bone] || 'Auxílio Cabeça';
+  document.getElementById('auxType').value = boneMap[config.aimbot.bone] || 'Auxílio Cabeça';
 
   document.getElementById('assistStrength').value = config.aimbot.strength;
   document.getElementById('strengthValue').textContent = config.aimbot.strength + '%';
@@ -586,22 +640,33 @@ function updateUIFromConfig() {
     }
   });
 
+  // Tema
+  document.querySelectorAll('.color-btn').forEach(btn => {
+    btn.style.border = (btn.dataset.color === config.themeColor) ? '3px solid white' : '3px solid transparent';
+  });
+
   document.getElementById('engineVersion').textContent = config.engineVersion || "—";
   updateAimbotToggleButton();
 }
 
 // ────────────────────────────────────────────────
-//  SIMULAÇÃO DE INJEÇÃO (feedback visual)
+//  SIMULAÇÃO DE INJEÇÃO (MELHORADA COM LOADER)
 // ────────────────────────────────────────────────
 
-function simulateEngineInjection() {
+function simulateEngineInjection(callback) {
   const isA23 = isA23Device();
   showToast(isA23 ? "Injetando engine otimizada para A23..." : "Injetando Engine v5.0...", 3800, 'warning');
 
+  // Simula loader
+  const loaderInterval = setInterval(() => {
+    showToast("Injetando... " + Math.floor(Math.random() * 100) + "%", 1000, 'warning');
+  }, 800);
+
   setTimeout(() => {
-    const successChance = isA23 ? 0.94 : 0.84;
+    clearInterval(loaderInterval);
+    const successChance = isA23 ? 0.98 : 0.88; // Aumentei chance para A23
     if (Math.random() < successChance) {
-      const compat = Math.floor(88 + Math.random() * 10);
+      const compat = Math.floor(90 + Math.random() * 10);
       showToast(`Engine OB52 v5.0 injetada com sucesso (${compat}% compatibilidade)`, 5200, 'success');
       
       document.querySelectorAll('.status-indicator').forEach(ind => {
@@ -609,18 +674,20 @@ function simulateEngineInjection() {
         ind.style.background = '#4caf50';
         ind.style.boxShadow = '0 0 20px #4caf50';
       });
+      if (callback) callback(true);
     } else {
       showToast("Falha na injeção – possível detecção pelo anti-cheat", 6500, 'error');
       setTimeout(() => {
         document.getElementById('mainPanel').style.display = 'none';
         document.getElementById('loginBox').style.display = 'block';
       }, 2800);
+      if (callback) callback(false);
     }
-  }, isA23 ? 1600 : 2600);
+  }, isA23 ? 1500 : 2500);
 }
 
 // ────────────────────────────────────────────────
-//  UI – ATUALIZAÇÕES ESPECÍFICAS
+//  UI – ATUALIZAÇÕES
 // ────────────────────────────────────────────────
 
 function updateAimbotToggleButton() {
@@ -635,7 +702,7 @@ function updateAimbotToggleButton() {
 }
 
 // ────────────────────────────────────────────────
-//  ABRIR FREE FIRE – Tentativa inteligente
+//  ABRIR FREE FIRE – TENTATIVA INTELIGENTE
 // ────────────────────────────────────────────────
 
 async function attemptLaunchFreeFire() {
@@ -662,7 +729,7 @@ async function attemptLaunchFreeFire() {
 }
 
 // ────────────────────────────────────────────────
-//  EVENT LISTENERS – Tudo centralizado
+//  EVENT LISTENERS – CENTRALIZADOS E APRIMORADOS
 // ────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -706,7 +773,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('auxType').addEventListener('change', e => {
-    config.aimbot.bone = e.target.value.toLowerCase().replace(/auxílio\s*/i, '').replace('ç', 'c');
+    const value = e.target.value.toLowerCase().replace(/auxílio\s*/i, '').replace('ç', 'c');
+    config.aimbot.bone = value;
   });
 
   document.querySelectorAll('input[name="tipo"]').forEach(radio => {
@@ -749,17 +817,17 @@ document.addEventListener('DOMContentLoaded', () => {
     this.disabled = true;
     this.textContent = 'INJETANDO + ABRINDO FREE FIRE...';
     
-    simulateEngineInjection();
-    await attemptLaunchFreeFire();
-    
-    this.textContent = 'ABRIR FREE FIRE + INJETAR ENGINE v5.0';
-    this.disabled = false;
+    simulateEngineInjection(async (success) => {
+      if (success) await attemptLaunchFreeFire();
+      this.textContent = 'ABRIR FREE FIRE + INJETAR ENGINE v5.0';
+      this.disabled = false;
+    });
   });
 
   document.getElementById('ativarExtraBtn').addEventListener('click', () => {
     const activeExtras = Object.entries(config.extras)
       .filter(([, active]) => active)
-      .map(([name]) => name.replace(/([A-Z])/g, ' $1').trim());
+      .map(([name]) => name.replace(/([A-Z])/g, ' $1').trim().toUpperCase());
     
     showToast(
       activeExtras.length ? activeExtras.join(' + ') + " ATIVOS" : "Nenhum extra selecionado",
@@ -769,12 +837,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('aplicarOtimizacaoBtn').addEventListener('click', () => {
-    const applied = [];
-    for (const [key, value] of Object.entries(config.optimization)) {
-      if (value && key !== 'fpsTarget') {
-        applied.push(key.replace(/([A-Z])/g, ' $1').trim());
-      }
-    }
+    const applied = Object.entries(config.optimization)
+      .filter(([key, value]) => value && key !== 'fpsTarget')
+      .map(([key]) => key.replace(/([A-Z])/g, ' $1').trim().toUpperCase());
     showToast(
       `OTIMIZAÇÃO A23 APLICADA • ${applied.join(' + ') || 'Nenhum'} • ${config.optimization.fpsTarget} FPS`,
       4000,
@@ -791,6 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('saveConfigBtn').addEventListener('click', saveUserConfig);
   document.getElementById('loadConfigBtn').addEventListener('click', () => loadUserConfig(false));
+  document.getElementById('resetConfigBtn').addEventListener('click', resetUserConfig);
 
   // Cores do tema
   document.querySelectorAll('.color-btn').forEach(btn => {
@@ -802,7 +868,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ─── Login ───
+  // ─── Login Aprimorado ───
   document.getElementById('enterBtn').addEventListener('click', async () => {
     const input = document.getElementById('licenseKey');
     const key = input.value.trim().toUpperCase();
@@ -822,15 +888,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modelo').textContent = getDeviceModelName();
     document.getElementById('engineVersion').textContent = ENGINE_VERSION;
 
-    // Relógio
+    // Relógio atualizado a cada segundo para precisão
     const timeEl = document.getElementById('horario');
     const updateClock = () => {
       timeEl.textContent = new Date().toLocaleTimeString('pt-BR', { hour12: false });
     };
     updateClock();
-    setInterval(updateClock, 30000);
+    setInterval(updateClock, 1000);
 
-    // Região aproximada
+    // Região via IP (fallback se falhar)
     try {
       const geo = await fetch('https://ipapi.co/json/').then(r => r.json());
       document.getElementById('regiao').textContent = `\( {geo.country_name || '?'} ( \){geo.region || '?'})`;
@@ -850,31 +916,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') document.getElementById('enterBtn').click();
   });
 
-  // Inicialização de partículas
+  // Inicialização de partículas (otimizada para mobile)
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   particlesJS('particles-js', {
     particles: {
-      number: { value: 50 },
+      number: { value: isMobile ? 30 : 50 },
       color: { value: currentThemeColor },
       opacity: { value: 0.6 },
       size: { value: 3 },
       line_linked: { enable: true, distance: 120, color: currentThemeColor, opacity: 0.4, width: 1 },
-      move: { enable: true, speed: 2.4 }
+      move: { enable: true, speed: isMobile ? 1.8 : 2.4 }
     },
     interactivity: { events: { onhover: { enable: false } } }
   });
 
   // Tema inicial
-  document.querySelector('.color-btn[data-color="#e60000"]').style.border = '3px solid white';
+  applyThemeColor(currentThemeColor);
+  document.querySelector(`.color-btn[data-color="${currentThemeColor}"]`).style.border = '3px solid white';
 
   // Carrega config inicial
   loadUserConfig(true);
 });
 
-// Registro PWA (opcional)
+// Registro PWA (opcional, aprimorado)
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(err => console.warn('Service Worker falhou:', err));
 }
   </script>
 
 </body>
-  </html>
+    </html>
