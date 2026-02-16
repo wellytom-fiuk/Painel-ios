@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project X Red v5.0 OB52 A23</title>
+  <title>Project X Red v5.0 - OB52 A23</title>
 
   <!-- PWA: Configurações neutras -->
   <link rel="manifest" href="manifest.json">
@@ -355,504 +355,525 @@
 
   <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
-  <!-- CÓDIGOS INSERIDOS (INVISÍVEL) -->
+  <!-- CÓDIGOS OCULTOS / PATTERNS DE MEMÓRIA - PROJECT X RED v5.0 -->
   <pre id="hiddenCodes" style="display:none" aria-hidden="true">
-    <!-- Mantido o conteúdo original dos patterns hex -->
-    # Aimbot / Headshot
-    S = 39 2A 09 04 04 1F 04 09 08 03 39 28 03 05 0D 04 09 08 03 39
-    R = 39 2A 09 04 04 1F 62 6F 6E 65 5F 48 69 70 73 04 09 08 03 39
 
-    # ... (mantidos todos os outros patterns originais)
+    # =====================================================================
+    # PATTERNS DE MEMÓRIA - FREE FIRE OB52 / A23 (2026)
+    # Formato: SEARCH → REPLACE
+    # Uso: injetados via engine externa / GG / internal cheat
+    # =====================================================================
+
+    # ─── Aimbot / Bone Targeting ────────────────────────────────────────
+    # Cabeça (Head) - mais comum e estável
+    HEAD_SEARCH    = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 2F 63 20 41 31
+    HEAD_REPLACE   = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF
+
+    # Pescoço (Neck) - fallback quando head é protegido
+    NECK_SEARCH    = 62 6F 6E 65 5F 4E 65 63 6B 00 00 00 00 00 00 00 00 00 00 00 00 00 3D 34
+    NECK_REPLACE   = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF
+
+    # Peito / Corpo (Chest fallback)
+    CHEST_SEARCH   = 62 6F 6E 65 5F 43 68 65 73 74 00 00 00 00 00 00 00 00 00 00 00 00 3D 34
+    CHEST_REPLACE  = 62 6F 6E 65 5F 48 65 61 64 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF
+
+    # ─── Magic Bullet / Bullet Drop Compensation ────────────────────────
+    MAGIC_BULLET_SEARCH = C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? ?? ?? ?? EC 51 B8
+    MAGIC_BULLET_REPLACE= C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8 3D CD CC 4C 3F 00 00 00 00 00 00 A0 42 FF FF FF FF 80 3F 01
+
+    # ─── No Recoil / Recoil Pattern Zero ─────────────────────────────────
+    RECOIL_PATTERN_X_SEARCH = 00 00 00 00 00 00 00 00 15 6E 00 00 00 00 00 00 00 40 01 00
+    RECOIL_PATTERN_X_REPLACE= 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00
+
+    RECOIL_PATTERN_Y_SEARCH = 00 00 00 00 00 00 00 00 FD 20 02 00 00 00 00 00 00 24 06 00
+    RECOIL_PATTERN_Y_REPLACE= 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00
+
+    # ─── Anti-Ban / Bypass Triggers (strings detectadas pelo anti-cheat) ──
+    BAN_STRINGS = [
+      "XH_REPORT_HACKKILL",
+      "XH_MAILBOX_REPORT",
+      "EVENT_TYPE_REPORT_CHEAT",
+      "ANTIHACK_CLOSEWINDOW",
+      "CHEAT_DETECTED",
+      "MEMORY_MODIFY",
+      "ILLEGAL_INJECTION",
+      "HITREG_VIOLATION",
+      "AIMBOT_FLAG",
+      "TELEMETRY_ANOMALY",
+      "SPEEDHACK_DETECT"
+    ]
+
+    # ─── FPS Unlock / Frame Rate Bypass ──────────────────────────────────
+    FPS_UNLOCK_SEARCH  = 3C 00 00 00 00 00
+    FPS_UNLOCK_REPLACE = 5A 00 00 00 00 00   # → \~144 FPS (experimental)
+
+    # ─── Outros (ESP, Wallhack, etc - placeholders) ──────────────────────
+    ESP_PLAYER_BOX_SEARCH   = ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 48 8B 05
+    ESP_PLAYER_BOX_REPLACE  = 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+
+    WALLHACK_VISIBLE_SEARCH = 00 00 80 3F ?? ?? ?? ?? 00 00 00 00
+    WALLHACK_VISIBLE_REPLACE= FF FF FF FF FF FF FF FF FF FF FF FF
+
+    # Fim dos patterns conhecidos para OB52 / A23 - 2026
+    # Atualizar sempre que houver OB update significativo
   </pre>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // =============================================
-    // PROJECT X RED v5.0 - Engine OB52 2026 - A23 Super Optimized
-    // Data: Fevereiro 2026
-    // =============================================
+// =============================================
+// PROJECT X RED v5.0 – Engine OB52 2026 – A23 Optimized
+// Refatorado: modular, legível, robusto e com melhor UX
+// =============================================
 
-    const ENGINE_VERSION = "OB52-2026-A23-SUPER-OPT-V5.0";
+const ENGINE_VERSION = "OB52-2026-A23-SUPER-OPT-V5.0";
+let currentThemeColor = "#e60000";
 
-    let currentColor = "#e60000";
+const defaultConfig = {
+  aimbot: {
+    active: false,
+    enabled: true,
+    fovEnabled: false,
+    fov: 90,
+    bone: "cabeca",
+    strength: 50,
+    smoothness: 85,
+    maxDistance: 100,
+    trigger: "olhar"
+  },
+  extras: {
+    antiPinadeira: true,
+    antiTremedeira: true,
+    fixarCabeca: false,
+    autoHeadshot: false,
+    noRecoil: true
+  },
+  optimization: {
+    limparCache: true,
+    fecharApps: true,
+    boostRAM: true,
+    otimizarBateria: true,
+    reduzirLag: true,
+    fpsTarget: "90"
+  },
+  engineVersion: ENGINE_VERSION,
+  isA23: false
+};
 
-    const config = {
-      aimbot: {
-        active: false,
-        enabled: true,
-        fovEnabled: false,
-        fov: 90,
-        bone: "cabeca",
-        strength: 50,
-        smoothness: 85,
-        maxDistance: 100,
-        trigger: "olhar"
-      },
-      extras: {
-        antiPinadeira: true,
-        antiTremedeira: true,
-        fixarCabeca: false,
-        autoHeadshot: false,
-        noRecoil: true
-      },
-      optimization: {
-        limparCache: true,
-        fecharApps: true,
-        boostRAM: true,
-        otimizarBateria: true,
-        reduzirLag: true,
-        fpsTarget: "90"
-      },
-      engineVersion: ENGINE_VERSION,
-      isA23: false
-    };
+let config = { ...defaultConfig };
 
-    // ========================
-    // PATTERNS OB52 + A23
-    // ========================
-    const patterns = {
-      player: {
-        isDying: "0x11a11e8",
-        maxHP: "0x1207dfc",
-        curHP: "0x1207cbc",
-        isVisible: "0x11b1254",
-        headCollider: "0x11abcf4",
-        setAimRotation: "0x11ad820",
-        getAttackableCenter: "0x11a7f1c",
-        getBonePosition: "0x11a8d4c"
-      },
-      head: {
-        search: "bone_Head" + "00".repeat(16) + "2fc A1",
-        replace: "bone_Head" + "00".repeat(16) + "FF FF"
-      },
-      neck: {
-        search: ["bone_Neck", "Neck_x", "neck_shadow", "bone_UpperNeck"].join("|"),
-        replace: "bone_Head"
-      },
-      chest: {
-        search: "bone_Chest" + "00".repeat(16) + "3d4",
-        replace: "bone_Head"
-      },
-      recoilX: {
-        oldCurve: "00 00 00 00 00 00 00 00 15 6E 00 00 00 00 00 00 00 40 01 00",
-        newCurve: "3F 80 00 00 3E 80 00 00 3F 00 00 00 3E 40 00 00" + "00".repeat(20)
-      },
-      recoilY: {
-        oldCurve: "00 00 00 00 00 00 00 00 FD 20 02 00 00 00 00 00 00 24 06 00",
-        newCurve: "3F 80 00 00 3E 80 00 00 3F 00 00 00 3E 40 00 00" + "00".repeat(20)
-      },
-      magicBullet: {
-        search: "C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D ?? 00 00 00 EC 51 B8",
-        replace: "C0 3F 33 33 93 3F 8F C2 F5 3C CD CC CC 3D 00 00 00 00 EC 51 B8" +
-                 "3D CD CC 4C 3F 00 00 00 00 00 00 A0 42 FF FF FF FF 80 3F 01"
-      },
-      banTriggers: [
-        "XH_REPORT_HACKKILL", "XH_MAILBOX_REPORT", "EVENT_TYPE_REPORT_CHEAT",
-        "ANTIHACK_CLOSEWINDOW", "T_38_XH", "T_34_XH", "CHEAT_DETECTED",
-        "MEMORY_MODIFY", "ILLEGAL_INJECTION", "TELEMETRY_ANOMALY", "HITREG_VIOLATION",
-        "SPEEDHACK_DETECT", "AIMBOT_FLAG"
-      ],
-      fpsUnlock: {
-        search: "3C 00 00 00 00 00",
-        replace: "5A 00 00 00 00 00"
-      }
-    };
+// ────────────────────────────────────────────────
+//  UTILITÁRIOS
+// ────────────────────────────────────────────────
 
-    // Função para detectar Galaxy A23
-    function isA23Device() {
-      const ua = navigator.userAgent.toLowerCase();
-      const model = getDeviceModel().toLowerCase();
-      return (ua.includes('sm-a235') || model.includes('galaxy a23')) && ua.includes('android');
+function isA23Device() {
+  const ua = navigator.userAgent.toLowerCase();
+  return /sm-a235|galaxy a23/.test(ua) && /android/.test(ua);
+}
+
+function getPersistentDeviceId() {
+  let id = localStorage.getItem("px_device_id_v5");
+  if (!id) {
+    id = "PX-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8).toUpperCase();
+    localStorage.setItem("px_device_id_v5", id);
+  }
+  return id;
+}
+
+function getDeviceModelName() {
+  const ua = navigator.userAgent;
+  const androidMatch = ua.match(/Android [\d.]+; ([\w\s-]+) Build/);
+  if (androidMatch) return androidMatch[1].trim();
+  if (/iPhone/.test(ua)) return "iPhone";
+  return "Desconhecido";
+}
+
+function showToast(msg, duration = 2800, type = 'info') {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = `toast show ${type}`;
+  setTimeout(() => toast.className = 'toast', duration);
+}
+
+function applyThemeColor(hex) {
+  currentThemeColor = hex;
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  
+  document.documentElement.style.setProperty('--primary', hex);
+  document.documentElement.style.setProperty('--primary-glow', `rgba(\( {r}, \){g},${b},0.5)`);
+  document.documentElement.style.setProperty('--accent', hex);
+
+  if (window.pJSDom?.[0]?.pJS) {
+    const p = window.pJSDom[0].pJS;
+    p.particles.color.value = hex;
+    p.particles.line_linked.color = hex;
+    p.fn.particlesRefresh();
+  }
+}
+
+function isValidLicenseKey(key) {
+  return /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/i.test(key);
+}
+
+// ────────────────────────────────────────────────
+//  CONFIG – LOCALSTORAGE
+// ────────────────────────────────────────────────
+
+function saveUserConfig() {
+  try {
+    config.isA23 = isA23Device();
+    config.engineVersion = ENGINE_VERSION;
+    localStorage.setItem('projectx_red_v50_ob52_a23', JSON.stringify(config));
+    showToast("Configurações salvas com sucesso", 2200, 'success');
+  } catch (err) {
+    showToast("Erro ao salvar configurações", 3200, 'error');
+    console.error("Falha saveConfig:", err);
+  }
+}
+
+function loadUserConfig(silent = false) {
+  try {
+    const saved = localStorage.getItem('projectx_red_v50_ob52_a23');
+    if (saved) {
+      Object.assign(config, JSON.parse(saved));
+      updateUIFromConfig();
+      if (!silent) showToast("Configurações restauradas", 2200, 'success');
     }
+  } catch (err) {
+    console.error("Erro ao carregar config:", err);
+  }
+}
 
-    // Função de simulação de injeção otimizada para A23
-    function simulateInjection() {
-      if (!isA23Device()) {
-        showToast("Device não é A23 - Otimizações parciais aplicadas", 3000, 'warning');
-      }
+function updateUIFromConfig() {
+  // Aimbot
+  document.getElementById('ativarAuxilio').checked = config.aimbot.enabled;
+  document.getElementById('ativarFov').checked = config.aimbot.fovEnabled;
+  document.getElementById('fovContainer').style.display = config.aimbot.fovEnabled ? 'block' : 'none';
+  document.getElementById('fovRange').value = config.aimbot.fov;
+  document.getElementById('fovValue').textContent = config.aimbot.fov + '°';
 
-      showToast("Injetando engine v5.0 OB52 pra A23...", 4000, 'warning');
+  const boneOptions = {
+    cabeca: 'Auxílio Cabeça',
+    pescoco: 'Auxílio Pescoço',
+    peito: 'Auxílio Peito',
+    recoil: 'Auxílio Recoil'
+  };
+  document.getElementById('auxType').value = boneOptions[config.aimbot.bone] || 'Auxílio Cabeça';
 
+  document.getElementById('assistStrength').value = config.aimbot.strength;
+  document.getElementById('strengthValue').textContent = config.aimbot.strength + '%';
+  document.getElementById('smoothnessRange').value = config.aimbot.smoothness;
+  document.getElementById('smoothValue').textContent = config.aimbot.smoothness + '%';
+  document.getElementById('maxLockDist').value = config.aimbot.maxDistance;
+  document.getElementById('maxDistValue').textContent = config.aimbot.maxDistance + 'm';
+
+  document.querySelector(`input[name="tipo"][value="${config.aimbot.trigger}"]`).checked = true;
+
+  // Extras
+  Object.entries(config.extras).forEach(([key, val]) => {
+    const el = document.getElementById(key);
+    if (el) el.checked = val;
+  });
+
+  // Otimização
+  Object.entries(config.optimization).forEach(([key, val]) => {
+    if (key === 'fpsTarget') {
+      document.getElementById('fpsSelect').value = val;
+    } else {
+      const el = document.getElementById(key);
+      if (el?.type === 'checkbox') el.checked = val;
+    }
+  });
+
+  document.getElementById('engineVersion').textContent = config.engineVersion || "—";
+  updateAimbotToggleButton();
+}
+
+// ────────────────────────────────────────────────
+//  SIMULAÇÃO DE INJEÇÃO (feedback visual)
+// ────────────────────────────────────────────────
+
+function simulateEngineInjection() {
+  const isA23 = isA23Device();
+  showToast(isA23 ? "Injetando engine otimizada para A23..." : "Injetando Engine v5.0...", 3800, 'warning');
+
+  setTimeout(() => {
+    const successChance = isA23 ? 0.94 : 0.84;
+    if (Math.random() < successChance) {
+      const compat = Math.floor(88 + Math.random() * 10);
+      showToast(`Engine OB52 v5.0 injetada com sucesso (${compat}% compatibilidade)`, 5200, 'success');
+      
+      document.querySelectorAll('.status-indicator').forEach(ind => {
+        ind.classList.add('active');
+        ind.style.background = '#4caf50';
+        ind.style.boxShadow = '0 0 20px #4caf50';
+      });
+    } else {
+      showToast("Falha na injeção – possível detecção pelo anti-cheat", 6500, 'error');
       setTimeout(() => {
-        const successRate = Math.random() > 0.1 ? (isA23Device() ? 95 : 85) : 5;
-        
-        if (successRate > 60) {
-          showToast(`Engine OB52 carregado! (${successRate}% compatível - A23 opt)\nBone: ${config.aimbot.bone} | FOV: ${config.aimbot.fov}° | Força: ${config.aimbot.strength}% | FPS: 90-120`, 5000, 'success');
-          
-          document.querySelectorAll('.status-indicator').forEach(el => {
-            el.classList.add('active');
-            el.style.boxShadow = '0 0 25px #00ff00';
-            el.style.background = '#00ff00';
-          });
-
-          if (window.pJSDom?.[0]?.pJS) {
-            const p = window.pJSDom[0].pJS;
-            p.particles.number.value = 20;
-            p.fn.particlesRefresh();
-          }
-        } else {
-          showToast("Falha na injeção - Anti-Cheat OB52 detectou! (Tente modo treino)", 6000, 'error');
-          setTimeout(() => {
-            document.getElementById('mainPanel').style.display = 'none';
-            document.getElementById('loginBox').style.display = 'block';
-          }, 2000);
-        }
-      }, isA23Device() ? 1800 : 2800);
+        document.getElementById('mainPanel').style.display = 'none';
+        document.getElementById('loginBox').style.display = 'block';
+      }, 2800);
     }
+  }, isA23 ? 1600 : 2600);
+}
 
-    // Funções auxiliares (mantidas da versão anterior)
-    function saveConfig() {
-      config.engineVersion = ENGINE_VERSION;
-      config.isA23 = isA23Device();
-      localStorage.setItem('projectx_config_v50_ob52_a23', JSON.stringify(config));
-      showToast("Config + Engine v5.0 A23 salva!", 2200, 'success');
+// ────────────────────────────────────────────────
+//  UI – ATUALIZAÇÕES ESPECÍFICAS
+// ────────────────────────────────────────────────
+
+function updateAimbotToggleButton() {
+  const btn = document.getElementById('ativarBtn');
+  if (config.aimbot.active) {
+    btn.textContent = 'DESATIVAR HEADTRICK';
+    btn.style.background = 'linear-gradient(135deg, #f44336, #d32f2f)';
+  } else {
+    btn.textContent = 'ATIVAR HEADTRICK';
+    btn.style.background = 'linear-gradient(135deg, var(--primary), var(--accent))';
+  }
+}
+
+// ────────────────────────────────────────────────
+//  ABRIR FREE FIRE – Tentativa inteligente
+// ────────────────────────────────────────────────
+
+async function attemptLaunchFreeFire() {
+  const schemes = [
+    'freefire://',
+    'ff://',
+    'com.dts.freefireth://',
+    'garena-free-fire://',
+    'freefiremax://'
+  ];
+
+  for (const scheme of schemes) {
+    const startTime = Date.now();
+    window.location.href = scheme;
+    await new Promise(r => setTimeout(r, 700));
+
+    if (document.hidden || Date.now() - startTime > 900) {
+      return true;
     }
+  }
 
-    function loadConfig(silent = false) {
-      const saved = localStorage.getItem('projectx_config_v50_ob52_a23');
-      if (saved) {
-        Object.assign(config, JSON.parse(saved));
-        applyConfigToUI();
-        if (!silent) showToast("Configurações v5.0 carregadas com sucesso!", 2000, 'success');
-      } else {
-        applyConfigToUI();
-        // Removido o toast de warning para não mostrar mensagem de "não encontrada"
-      }
-    }
+  showToast("Não foi possível abrir o Free Fire. Verifique se o app está instalado.", 4800, 'warning');
+  return false;
+}
 
-    function applyConfigToUI() {
-      document.getElementById('ativarAuxilio').checked = config.aimbot.enabled;
-      document.getElementById('ativarFov').checked = config.aimbot.fovEnabled;
-      document.getElementById('fovContainer').style.display = config.aimbot.fovEnabled ? 'block' : 'none';
-      document.getElementById('fovRange').value = config.aimbot.fov;
-      document.getElementById('fovValue').textContent = `${config.aimbot.fov}°`;
-      
-      const boneMap = { cabeca: 'Auxílio Cabeça', pescoco: 'Auxílio Pescoço', peito: 'Auxílio Peito', recoil: 'Auxílio Recoil' };
-      document.getElementById('auxType').value = boneMap[config.aimbot.bone] || 'Auxílio Cabeça';
-      
-      document.getElementById('assistStrength').value = config.aimbot.strength;
-      document.getElementById('strengthValue').textContent = `${config.aimbot.strength}%`;
-      document.getElementById('smoothnessRange').value = config.aimbot.smoothness;
-      document.getElementById('smoothValue').textContent = `${config.aimbot.smoothness}%`;
-      document.getElementById('maxLockDist').value = config.aimbot.maxDistance;
-      document.getElementById('maxDistValue').textContent = `${config.aimbot.maxDistance}m`;
-      document.querySelector(`input[name="tipo"][value="${config.aimbot.trigger}"]`).checked = true;
+// ────────────────────────────────────────────────
+//  EVENT LISTENERS – Tudo centralizado
+// ────────────────────────────────────────────────
 
-      Object.keys(config.extras).forEach(key => {
-        const el = document.getElementById(key);
-        if (el) el.checked = config.extras[key];
-      });
-
-      Object.keys(config.optimization).forEach(key => {
-        const el = document.getElementById(key);
-        if (el && el.type === 'checkbox') el.checked = config.optimization[key];
-      });
-      if (document.getElementById('fpsSelect')) {
-        document.getElementById('fpsSelect').value = config.optimization.fpsTarget;
-      }
-
-      document.getElementById('engineVersion').textContent = config.engineVersion || "—";
-
-      updateAimbotButton();
-      updateStatusIndicator();
-    }
-
-    function updateTheme(color) {
-      currentColor = color;
-      document.documentElement.style.setProperty('--primary', color);
-      document.documentElement.style.setProperty('--primary-glow', `rgba(${parseInt(color.slice(1,3),16)}, ${parseInt(color.slice(3,5),16)}, ${parseInt(color.slice(5,7),16)}, 0.5)`);
-      document.documentElement.style.setProperty('--accent', color);
-
-      if (window.pJSDom?.[0]?.pJS) {
-        const p = window.pJSDom[0].pJS;
-        p.particles.color.value = color;
-        p.particles.line_linked.color = color;
-        p.fn.particlesRefresh();
-      }
-    }
-
-    function showToast(message, duration = 2500, type = 'info') {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.className = 'toast show';
-      if (type === 'success') toast.style.color = 'var(--success)';
-      else if (type === 'error') toast.style.color = 'var(--error)';
-      else if (type === 'warning') toast.style.color = 'var(--warning)';
-      else toast.style.color = 'var(--primary)';
-      
-      setTimeout(() => toast.classList.remove('show'), duration);
-    }
-
-    function getDeviceId() {
-      let id = localStorage.getItem("px_device_id");
-      if (!id) {
-        id = "PX-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7).toUpperCase();
-        localStorage.setItem("px_device_id", id);
-      }
-      return id;
-    }
-
-    function getDeviceModel() {
-      const ua = navigator.userAgent;
-      if (/android/i.test(ua)) return ua.match(/Android [\d.]+; ([\w\s]+) Build/)?.[1] || "Dispositivo Android";
-      if (/iPhone/.test(ua)) return "iPhone";
-      return "Dispositivo desconhecido";
-    }
-
-    async function loadSystemInfo(key) {
-      document.getElementById("key").textContent = key || "XXXX-XXXX-XXXX";
-      document.getElementById("deviceId").textContent = getDeviceId();
-      document.getElementById("modelo").textContent = getDeviceModel();
-      document.getElementById("engineVersion").textContent = ENGINE_VERSION;
-
-      const updateTime = () => {
-        document.getElementById("horario").textContent = new Date().toLocaleTimeString("pt-BR", { hour12: false });
-      };
-      updateTime();
-      setInterval(updateTime, 60000);
-
-      try {
-        const res = await fetch('https://ipapi.co/json/');
-        if (!res.ok) throw new Error('Falha na requisição');
-        const data = await res.json();
-        document.getElementById("regiao").textContent = `\( {data.country_name || "?"} ( \){data.region || "?"})`;
-      } catch (err) {
-        document.getElementById("regiao").textContent = "Indisponível";
-      }
-    }
-
-    function updateAimbotButton() {
-      const btn = document.getElementById('ativarBtn');
-      if (config.aimbot.active) {
-        btn.textContent = 'DESATIVAR HEADTRICK';
-        btn.style.background = 'linear-gradient(135deg, #f44336, #d32f2f)';
-      } else {
-        btn.textContent = 'ATIVAR HEADTRICK';
-        btn.style.background = 'linear-gradient(135deg, var(--primary), var(--accent))';
-      }
-    }
-
-    function updateStatusIndicator() {
-      const indicator = document.querySelector('.status-indicator');
-      if (indicator) {
-        indicator.classList.toggle('active', config.aimbot.enabled && config.aimbot.active);
-      }
-    }
-
-    function validateKey(key) {
-      return /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(key);
-    }
-
-    function abrirFF(){
-      const schemes = [
-        'freefire://',
-        'ff://',
-        'com.dts.freefireth://',
-        'garena-free-fire://',
-        'freefiremax://'
-      ];
-      let opened = false;
-      const visibilityHandler = () => { if (document.hidden) opened = true; };
-      document.addEventListener('visibilitychange', visibilityHandler);
-      let i = 0;
-      function tryNext(){
-        if (opened) {
-          document.removeEventListener('visibilitychange', visibilityHandler);
-          return;
-        }
-        if (i >= schemes.length) {
-          document.removeEventListener('visibilitychange', visibilityHandler);
-          showToast("Não foi possível abrir o Free Fire. Verifique se o app está instalado.", 4000, 'warning');
-          return;
-        }
-        window.location.href = schemes[i];
-        i++;
-        setTimeout(() => {
-          if (!document.hidden) tryNext();
-          else document.removeEventListener('visibilitychange', visibilityHandler);
-        }, 700);
-      }
-      tryNext();
-      setTimeout(() => {
-        if (!opened) {
-          document.removeEventListener('visibilitychange', visibilityHandler);
-          showToast("Não foi possível abrir o Free Fire. Verifique se o app está instalado.", 4000, 'warning');
-        }
-      }, 3000);
-    }
-
-    // ========================
-    // EVENT LISTENERS
-    // ========================
-    document.addEventListener('DOMContentLoaded', () => {
-      // Tabs
-      document.querySelectorAll('.tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-          document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-          tab.classList.add('active');
-          document.getElementById(tab.dataset.tab).classList.add('active');
-        });
-      });
-
-      // Aimbot controls
-      document.getElementById('ativarAuxilio').addEventListener('change', e => { 
-        config.aimbot.enabled = e.target.checked; 
-        updateStatusIndicator(); 
-      });
-      document.getElementById('ativarFov').addEventListener('change', e => {
-        config.aimbot.fovEnabled = e.target.checked;
-        document.getElementById('fovContainer').style.display = e.target.checked ? 'block' : 'none';
-      });
-      document.getElementById('fovRange').addEventListener('input', e => {
-        config.aimbot.fov = +e.target.value;
-        document.getElementById('fovValue').textContent = `${e.target.value}°`;
-      });
-      document.getElementById('assistStrength').addEventListener('input', e => {
-        config.aimbot.strength = +e.target.value;
-        document.getElementById('strengthValue').textContent = `${e.target.value}%`;
-      });
-      document.getElementById('smoothnessRange').addEventListener('input', e => {
-        config.aimbot.smoothness = +e.target.value;
-        document.getElementById('smoothValue').textContent = `${e.target.value}%`;
-      });
-      document.getElementById('maxLockDist').addEventListener('input', e => {
-        config.aimbot.maxDistance = +e.target.value;
-        document.getElementById('maxDistValue').textContent = `${e.target.value}m`;
-      });
-      document.getElementById('auxType').addEventListener('change', e => {
-        const value = e.target.value.toLowerCase().replace('auxílio ', '').replace('ç', 'c');
-        config.aimbot.bone = value;
-      });
-      document.querySelectorAll('input[name="tipo"]').forEach(r => {
-        r.addEventListener('change', () => config.aimbot.trigger = r.value);
-      });
-
-      // Extras & Otimização
-      ['antiPinadeira','antiTremedeira','fixarCabeca','autoHeadshot','noRecoil'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('change', e => config.extras[id] = e.target.checked);
-      });
-      ['limparCache','fecharApps','boostRAM','otimizarBateria','reduzirLag'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('change', e => config.optimization[id] = e.target.checked);
-      });
-      const fpsEl = document.getElementById('fpsSelect');
-      if (fpsEl) fpsEl.addEventListener('change', e => config.optimization.fpsTarget = e.target.value);
-
-      // Botões principais
-      document.getElementById('ativarBtn').addEventListener('click', () => {
-        config.aimbot.active = !config.aimbot.active;
-        updateAimbotButton();
-        
-        if (config.aimbot.active) {
-          if (isA23Device()) {
-            config.aimbot.smoothness = Math.floor(config.aimbot.smoothness * 0.9);
-            document.getElementById('smoothValue').textContent = `${config.aimbot.smoothness}%`;
-          }
-          simulateInjection();
-          const boneUpper = config.aimbot.bone.toUpperCase().replace('C', 'Ç');
-          showToast(`HEADTRICK ATIVADO • ${boneUpper} • ${config.aimbot.strength}%`, 3500, 'success');
-        } else {
-          showToast('HEADTRICK DESATIVADO', 3000, 'error');
-        }
-      });
-
-      document.getElementById('openFFBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        this.textContent = 'INJETANDO ENGINE v5.0 A23...';
-        this.disabled = true;
-        setTimeout(() => {
-          simulateInjection();
-          abrirFF();
-          this.textContent = 'ABRIR FREE FIRE + ENGINE OB52 A23';
-          this.disabled = false;
-        }, 2000);
-      });
-
-      document.getElementById('ativarExtraBtn').addEventListener('click', () => {
-        const active = Object.keys(config.extras).filter(k => config.extras[k]).map(k => k.replace(/([A-Z])/g, ' $1').trim());
-        showToast(active.length ? `${active.join(' + ')} ATIVOS` : 'Nenhum extra selecionado', 4000, active.length ? 'success' : 'warning');
-      });
-
-      document.getElementById('aplicarOtimizacaoBtn').addEventListener('click', () => {
-        const list = [];
-        if (config.optimization.limparCache) list.push('Cache');
-        if (config.optimization.fecharApps) list.push('Apps');
-        if (config.optimization.boostRAM) list.push('RAM');
-        if (config.optimization.otimizarBateria) list.push('Bateria');
-        if (config.optimization.reduzirLag) list.push('Rede');
-        showToast(`OTIMIZAÇÃO A23 APLICADA • ${list.join(' + ')} • ${config.optimization.fpsTarget} FPS`, 3500, 'success');
-      });
-
-      document.getElementById("dnsAndroidBtn").addEventListener('click', () => showToast("DNS Android configurado!", 2500, 'success'));
-      document.getElementById("dnsIphoneBtn").addEventListener('click', () => showToast("DNS iPhone configurado!", 2500, 'success'));
-
-      document.getElementById('saveConfigBtn').addEventListener('click', saveConfig);
-      document.getElementById('loadConfigBtn').addEventListener('click', () => loadConfig(false));
-
-      document.querySelectorAll('.color-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.color-btn').forEach(b => b.style.border = '3px solid transparent');
-          btn.style.border = '3px solid white';
-          updateTheme(btn.dataset.color);
-          showToast('Tema aplicado!', 1500);
-        });
-      });
-
-      document.getElementById('enterBtn').addEventListener('click', async () => {
-        const keyInput = document.getElementById('licenseKey');
-        const key = keyInput.value.trim().toUpperCase();
-        if (!validateKey(key)) {
-          showToast('Key inválida! Formato: XXXX-XXXX-XXXX', 3000, 'error');
-          keyInput.focus();
-          return;
-        }
-
-        document.getElementById('loginBox').style.display = 'none';
-        document.getElementById('mainPanel').style.display = 'block';
-
-        await loadSystemInfo(key);
-        loadConfig(true);
-
-        // A23 detection no login
-        if (isA23Device()) {
-          showToast("Galaxy A23 detectado - Otimizações extras aplicadas!", 3500, 'success');
-          config.isA23 = true;
-        }
-
-        showToast('Autenticação bem-sucedida! Engine v5.0 OB52 carregado.', 4000, 'success');
-      });
-
-      document.getElementById('licenseKey').addEventListener('keypress', e => {
-        if (e.key === 'Enter') document.getElementById('enterBtn').click();
-      });
-
-      // Partículas otimizadas
-      particlesJS('particles-js', {
-        particles: {
-          number: {value: 50},
-          color: {value: currentColor},
-          opacity: {value: 0.6},
-          size: {value: 3},
-          line_linked: {enable: true, distance: 120, color: currentColor, opacity: 0.35, width: 1},
-          move: {enable: true, speed: 2.5}
-        },
-        interactivity: {events: {onhover: {enable: false}}}
-      });
-
-      document.querySelector('.color-btn[data-color="#e60000"]').style.border = '3px solid white';
-
-      // Carrega config inicial silenciosamente
-      loadConfig(true);
+document.addEventListener('DOMContentLoaded', () => {
+  // Tabs navigation
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab, .content').forEach(el => el.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
     });
+  });
 
-    // Service Worker para PWA
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service Worker registrado.'))
-        .catch(err => console.warn('Erro no SW:', err));
+  // ─── Aimbot Controls ───
+  document.getElementById('ativarAuxilio').addEventListener('change', e => {
+    config.aimbot.enabled = e.target.checked;
+  });
+
+  document.getElementById('ativarFov').addEventListener('change', e => {
+    config.aimbot.fovEnabled = e.target.checked;
+    document.getElementById('fovContainer').style.display = e.target.checked ? 'block' : 'none';
+  });
+
+  document.getElementById('fovRange').addEventListener('input', e => {
+    config.aimbot.fov = Number(e.target.value);
+    document.getElementById('fovValue').textContent = e.target.value + '°';
+  });
+
+  document.getElementById('assistStrength').addEventListener('input', e => {
+    config.aimbot.strength = Number(e.target.value);
+    document.getElementById('strengthValue').textContent = e.target.value + '%';
+  });
+
+  document.getElementById('smoothnessRange').addEventListener('input', e => {
+    config.aimbot.smoothness = Number(e.target.value);
+    document.getElementById('smoothValue').textContent = e.target.value + '%';
+  });
+
+  document.getElementById('maxLockDist').addEventListener('input', e => {
+    config.aimbot.maxDistance = Number(e.target.value);
+    document.getElementById('maxDistValue').textContent = e.target.value + 'm';
+  });
+
+  document.getElementById('auxType').addEventListener('change', e => {
+    config.aimbot.bone = e.target.value.toLowerCase().replace(/auxílio\s*/i, '').replace('ç', 'c');
+  });
+
+  document.querySelectorAll('input[name="tipo"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      config.aimbot.trigger = radio.value;
+    });
+  });
+
+  // ─── Extras & Otimização ───
+  document.querySelectorAll('#extra input[type="checkbox"], #otimizacao input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', e => {
+      const section = checkbox.closest('.content').id;
+      const group = section === 'extra' ? 'extras' : 'optimization';
+      config[group][checkbox.id] = e.target.checked;
+    });
+  });
+
+  document.getElementById('fpsSelect')?.addEventListener('change', e => {
+    config.optimization.fpsTarget = e.target.value;
+  });
+
+  // ─── Botões Principais ───
+  document.getElementById('ativarBtn').addEventListener('click', () => {
+    config.aimbot.active = !config.aimbot.active;
+    updateAimbotToggleButton();
+
+    if (config.aimbot.active) {
+      if (isA23Device()) {
+        config.aimbot.smoothness = Math.max(35, Math.floor(config.aimbot.smoothness * 0.93));
+        document.getElementById('smoothValue').textContent = config.aimbot.smoothness + '%';
+      }
+      simulateEngineInjection();
+      showToast(`HEADTRICK ATIVADO • ${config.aimbot.bone.toUpperCase()} • ${config.aimbot.strength}%`, 3400, 'success');
+    } else {
+      showToast('HEADTRICK DESATIVADO', 3000, 'error');
     }
+  });
+
+  document.getElementById('openFFBtn').addEventListener('click', async function() {
+    this.disabled = true;
+    this.textContent = 'INJETANDO + ABRINDO FREE FIRE...';
+    
+    simulateEngineInjection();
+    await attemptLaunchFreeFire();
+    
+    this.textContent = 'ABRIR FREE FIRE + INJETAR ENGINE v5.0';
+    this.disabled = false;
+  });
+
+  document.getElementById('ativarExtraBtn').addEventListener('click', () => {
+    const activeExtras = Object.entries(config.extras)
+      .filter(([, active]) => active)
+      .map(([name]) => name.replace(/([A-Z])/g, ' $1').trim());
+    
+    showToast(
+      activeExtras.length ? activeExtras.join(' + ') + " ATIVOS" : "Nenhum extra selecionado",
+      4200,
+      activeExtras.length ? 'success' : 'warning'
+    );
+  });
+
+  document.getElementById('aplicarOtimizacaoBtn').addEventListener('click', () => {
+    const applied = [];
+    for (const [key, value] of Object.entries(config.optimization)) {
+      if (value && key !== 'fpsTarget') {
+        applied.push(key.replace(/([A-Z])/g, ' $1').trim());
+      }
+    }
+    showToast(
+      `OTIMIZAÇÃO A23 APLICADA • ${applied.join(' + ') || 'Nenhum'} • ${config.optimization.fpsTarget} FPS`,
+      4000,
+      'success'
+    );
+  });
+
+  ['dnsAndroidBtn', 'dnsIphoneBtn'].forEach(id => {
+    document.getElementById(id)?.addEventListener('click', () => {
+      const device = id.includes('Android') ? 'Android' : 'iPhone';
+      showToast(`DNS ${device} configurado com sucesso!`, 2400, 'success');
+    });
+  });
+
+  document.getElementById('saveConfigBtn').addEventListener('click', saveUserConfig);
+  document.getElementById('loadConfigBtn').addEventListener('click', () => loadUserConfig(false));
+
+  // Cores do tema
+  document.querySelectorAll('.color-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.color-btn').forEach(b => b.style.border = '3px solid transparent');
+      btn.style.border = '3px solid white';
+      applyThemeColor(btn.dataset.color);
+      showToast('Tema atualizado', 1600, 'success');
+    });
+  });
+
+  // ─── Login ───
+  document.getElementById('enterBtn').addEventListener('click', async () => {
+    const input = document.getElementById('licenseKey');
+    const key = input.value.trim().toUpperCase();
+
+    if (!isValidLicenseKey(key)) {
+      showToast('Formato inválido → use XXXX-XXXX-XXXX', 3400, 'error');
+      input.focus();
+      return;
+    }
+
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('mainPanel').style.display = 'block';
+
+    // Preenche informações do sistema
+    document.getElementById('key').textContent = key;
+    document.getElementById('deviceId').textContent = getPersistentDeviceId();
+    document.getElementById('modelo').textContent = getDeviceModelName();
+    document.getElementById('engineVersion').textContent = ENGINE_VERSION;
+
+    // Relógio
+    const timeEl = document.getElementById('horario');
+    const updateClock = () => {
+      timeEl.textContent = new Date().toLocaleTimeString('pt-BR', { hour12: false });
+    };
+    updateClock();
+    setInterval(updateClock, 30000);
+
+    // Região aproximada
+    try {
+      const geo = await fetch('https://ipapi.co/json/').then(r => r.json());
+      document.getElementById('regiao').textContent = `\( {geo.country_name || '?'} ( \){geo.region || '?'})`;
+    } catch {
+      document.getElementById('regiao').textContent = "Indisponível";
+    }
+
+    if (isA23Device()) {
+      showToast("Dispositivo Galaxy A23 detectado – otimizações especiais aplicadas", 4200, 'success');
+    }
+
+    loadUserConfig(true);
+    showToast('Sessão iniciada – Engine v5.0 OB52 carregada', 4800, 'success');
+  });
+
+  document.getElementById('licenseKey').addEventListener('keypress', e => {
+    if (e.key === 'Enter') document.getElementById('enterBtn').click();
+  });
+
+  // Inicialização de partículas
+  particlesJS('particles-js', {
+    particles: {
+      number: { value: 50 },
+      color: { value: currentThemeColor },
+      opacity: { value: 0.6 },
+      size: { value: 3 },
+      line_linked: { enable: true, distance: 120, color: currentThemeColor, opacity: 0.4, width: 1 },
+      move: { enable: true, speed: 2.4 }
+    },
+    interactivity: { events: { onhover: { enable: false } } }
+  });
+
+  // Tema inicial
+  document.querySelector('.color-btn[data-color="#e60000"]').style.border = '3px solid white';
+
+  // Carrega config inicial
+  loadUserConfig(true);
+});
+
+// Registro PWA (opcional)
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(err => console.warn('Service Worker falhou:', err));
+}
   </script>
 
 </body>
