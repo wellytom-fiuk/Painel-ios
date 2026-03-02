@@ -222,6 +222,21 @@
       .btn, .btn-link { font-size: 0.95rem; padding: 14px; }
       .tabs { font-size: 0.9rem; }
     }
+
+    /* NOVO: Overlay do FOV na tela */
+    #fovOverlay {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999;
+      display: none;
+      box-shadow: 0 0 20px var(--primary-glow);
+      opacity: 0.6;
+    }
   </style>
 </head>
 <body>
@@ -439,6 +454,9 @@ BYPASS_SPEED_ANTI_BAN_REPLACE = 82 00 8D E8 10 17 02 E3 00 FF 00 00 FF 00 58 E3 
     </pre>
   </div>
 
+  <!-- NOVO: Overlay do FOV -->
+  <div id="fovOverlay"></div>
+
   <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
@@ -446,6 +464,7 @@ BYPASS_SPEED_ANTI_BAN_REPLACE = 82 00 8D E8 10 17 02 E3 00 FF 00 00 FF 00 58 E3 
 // =============================================
 // PROJECT X RED v6.1 – Engine OB52 2026 – A23 Optimized
 // Versão corrigida: Removido Lua GG, corrigidos erros de indentação, eventos duplicados, referências nulas, e otimizações de performance
+// Adicionado: FOV overlay na tela com regulagem em tempo real
 // =============================================
 
 const ENGINE_VERSION = "OB52-2026-A23-ELITE-PRO-V6.1";
@@ -613,6 +632,7 @@ function updateUIFromConfig() {
 
   document.getElementById('engineVersion').textContent = config.engineVersion || "—";
   updateAimbotToggleButton();
+  updateFovOverlay();  // Atualiza o overlay ao carregar config
 }
 
 // ────────────────────────────────────────────────
@@ -652,6 +672,7 @@ function updateAimbotToggleButton() {
     btn.textContent = 'ATIVAR HEADTRICK';
     btn.style.background = 'linear-gradient(135deg, var(--primary), var(--accent))';
   }
+  updateFovOverlay();  // Atualiza overlay ao toggle aimbot
 }
 
 async function attemptLaunchFreeFire() {
@@ -664,6 +685,21 @@ async function attemptLaunchFreeFire() {
   }
   showToast("Não foi possível abrir o Free Fire.", 4800, 'warning');
   return false;
+}
+
+// ────────────────────────────────────────────────
+//  FUNÇÃO NOVA: Atualizar Overlay do FOV
+// ────────────────────────────────────────────────
+function updateFovOverlay() {
+  const overlay = document.getElementById('fovOverlay');
+  if (config.aimbot.active && config.aimbot.fovEnabled) {
+    const size = config.aimbot.fov * 2;  // Ajuste o multiplicador para tamanho proporcional (ex: *2 para diâmetro em px)
+    overlay.style.width = `${size}px`;
+    overlay.style.height = `${size}px`;
+    overlay.style.display = 'block';
+  } else {
+    overlay.style.display = 'none';
+  }
 }
 
 // ────────────────────────────────────────────────
@@ -686,11 +722,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('ativarFov').addEventListener('change', e => {
     config.aimbot.fovEnabled = e.target.checked;
     document.getElementById('fovContainer').style.display = e.target.checked ? 'block' : 'none';
+    updateFovOverlay();
   });
 
   document.getElementById('fovRange').addEventListener('input', e => {
     config.aimbot.fov = Number(e.target.value);
     document.getElementById('fovValue').textContent = e.target.value + '°';
+    updateFovOverlay();  // Atualiza em tempo real
   });
 
   document.getElementById('auxType').addEventListener('change', e => {
@@ -726,6 +764,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       showToast('HEADTRICK DESATIVADO', 3000, 'error');
     }
+    updateFovOverlay();  // Atualiza ao ativar/desativar
   });
 
   document.getElementById('openFFBtn').addEventListener('click', async function() {
