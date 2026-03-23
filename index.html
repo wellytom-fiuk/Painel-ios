@@ -674,7 +674,7 @@ function updateFovOverlay() {
   }
 }
 
-// ====================== FUNÇÃO QUE ABRE FREE FIRE (ÚNICA COISA QUE FOI CORRIGIDA) ======================
+// ====================== FUNÇÃO QUE ABRE FREE FIRE ======================
 async function attemptLaunchFreeFire() {
   showToast("🚀 Preparando Free Fire...", 1200, 'warning');
 
@@ -741,13 +741,21 @@ document.addEventListener('DOMContentLoaded', () => {
     updateFovOverlay();
   });
 
+  // ====================== BOTÃO QUE NUNCA MAIS FICA TRAVADO ======================
   document.getElementById('openFFBtn').addEventListener('click', async function() {
+    const originalText = this.textContent;
     this.disabled = true;
     this.textContent = 'INJETANDO + ABRINDO FREE FIRE...';
+
     simulateEngineInjection(async (success) => {
-      if (success) await attemptLaunchFreeFire();
-      this.textContent = 'ABRIR FREE FIRE + INJETAR ENGINE v6.1';
-      this.disabled = false;
+      try {
+        if (success) await attemptLaunchFreeFire();
+      } catch (e) {
+        console.error(e);
+      } finally {
+        this.textContent = originalText;
+        this.disabled = false;
+      }
     });
   });
 
@@ -843,4 +851,4 @@ if ('serviceWorker' in navigator) {
   </script>
 
 </body>
-  </html>
+          </html>
