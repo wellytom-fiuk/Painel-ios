@@ -1,0 +1,12 @@
+{
+  "name": "Nubank",
+  "short_name": "Nubank",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#820AD1",
+  "background_color": "#121212",
+  "icons": [
+    { "src": "nubank-logo.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "nubank-logo.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
